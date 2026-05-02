@@ -1,35 +1,31 @@
-// Dữ liệu giả (Mock Data) chuẩn theo DB G9_SanPham mà nhóm đã chốt
 const mockProducts = [
     {
         id: 1,
         name: "Nhẫn vàng 18K",
         price: 5000000,
-        image: "images/nhan-vang.jpg", // Đổi thành đường dẫn ảnh lưu trên máy
+        image: "images/nhan-vang.jpg",
         category: "Nhẫn"
     },
     {
         id: 2,
         name: "Nhẫn bạc đính đá kim cương",
         price: 1200000,
-        image: "images/nhan-bac.jpg", // Đổi thành đường dẫn ảnh lưu trên máy
+        image: "images/nhan-bac.jpg",
         category: "Nhẫn"
     },
     {
         id: 3,
         name: "Dây chuyền bạch kim nguyên chất",
         price: 7000000,
-        image: "images/day-chuyen.jpg", // Đổi thành đường dẫn ảnh lưu trên máy
+        image: "images/day-chuyen.jpg",
         category: "Dây chuyền"
     }
 ];
 
-// Hàm định dạng tiền tệ sang VNĐ (ví dụ: 5.000.000 ₫)
 const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 };
 
-// Hàm render sản phẩm ra giao diện HTML
-// Hàm render sản phẩm ra giao diện HTML
 const renderProducts = () => {
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
@@ -59,7 +55,7 @@ const renderProducts = () => {
         productList.innerHTML += productCard;
     });
 };
-// Đảm bảo giao diện HTML tải xong hết mới bắt đầu chạy hàm render
+
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
 });
