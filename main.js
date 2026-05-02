@@ -29,35 +29,36 @@ const formatCurrency = (amount) => {
 };
 
 // Hàm render sản phẩm ra giao diện HTML
+// Hàm render sản phẩm ra giao diện HTML
 const renderProducts = () => {
-    // Tìm phần tử có id="product-list" bên file index.html
     const productList = document.getElementById('product-list');
-
-    // Xóa dòng chữ "Đang tải sản phẩm..." đi
     productList.innerHTML = '';
 
-    // Vòng lặp để tạo HTML cho từng sản phẩm trong mảng mockProducts
     mockProducts.forEach(product => {
         const productCard = `
             <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="${product.image}" class="card-img-top rounded" alt="${product.name}" style="height: 250px; object-fit: cover;">
-                    <div class="card-body d-flex flex-column mt-2">
-                        <span class="badge bg-light text-dark border w-25 mb-2">${product.category}</span>
-                        <h5 class="card-title">${product.name}</h5>
-                        <p class="card-text text-danger fw-bold fs-5 mb-4">${formatCurrency(product.price)}</p>
-                        <button class="btn btn-dark mt-auto w-100 py-2">
-                            <i class="fas fa-cart-plus me-2"></i> Thêm vào giỏ
+                <div class="card h-100 border-0 card-hover bg-white shadow-sm">
+                    <div class="img-wrapper">
+                        <!-- Thêm class product-img để tạo hiệu ứng zoom -->
+                        <img src="${product.image}" class="card-img-top product-img" alt="${product.name}" style="height: 320px; object-fit: cover;">
+                    </div>
+                    <!-- Căn giữa nội dung, thêm khoảng padding -->
+                    <div class="card-body d-flex flex-column text-center p-4">
+                        <span class="text-uppercase text-muted fw-semibold mb-2" style="font-size: 0.75rem; letter-spacing: 2px;">${product.category}</span>
+                        <h5 class="card-title fw-bold text-dark mb-3">${product.name}</h5>
+                        <!-- Sử dụng text-gold cho giá tiền -->
+                        <p class="card-text text-gold fw-bold fs-5 mb-4">${formatCurrency(product.price)}</p>
+                        <!-- Nút bấm bo tròn -->
+                        <button class="btn bg-gold mt-auto w-100 py-2 rounded-pill shadow-sm">
+                            <i class="fas fa-shopping-bag me-2"></i> Thêm vào giỏ hàng
                         </button>
                     </div>
                 </div>
             </div>
         `;
-        // Đẩy khối HTML vừa tạo vào danh sách
         productList.innerHTML += productCard;
     });
 };
-
 // Đảm bảo giao diện HTML tải xong hết mới bắt đầu chạy hàm render
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
