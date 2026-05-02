@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G9 Trang Sức - Trang Chủ</title>
+
+    <!-- Nhúng CSS của Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Nhúng thư viện FontAwesome để lấy icon Giỏ hàng và User -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+        <div class="container">
+            <!-- Tên thương hiệu -->
+            <a class="navbar-brand fw-bold text-uppercase" href="#">G9_TrangSuc</a>
+
+            <!-- Nút menu dạng hamburger cho giao diện điện thoại -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Menu danh mục -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nhẫn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dây chuyền</a>
+                    </li>
+                </ul>
+
+                <!-- Khu vực icon bên phải (Giỏ hàng & User) -->
+                <div class="d-flex align-items-center">
+                    <!-- Icon Giỏ hàng có huy hiệu (Badge) đếm số lượng -->
+                    <a href="#" class="text-dark me-4 position-relative">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            style="font-size: 0.65rem;">
+                            0
+                        </span>
+                    </a>
+
+                    <!-- Nút Đăng nhập -->
+                    <a href="#" class="btn btn-outline-dark btn-sm">
+                        <i class="fas fa-user me-1"></i> Đăng nhập
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Phần thân trang (Main Content) -->
+    <main class="container my-5 flex-grow-1" id="main-content">
+        <h2 class="text-center mb-5 text-uppercase">Sản phẩm nổi bật</h2>
+
+        <!-- Grid chứa danh sách sản phẩm -->
+        <div class="row g-4" id="product-list">
+            <!-- Code tĩnh tạm thời (Placeholder) - Lát nữa chúng ta sẽ dùng JavaScript để đổ dữ liệu vào đây -->
+            <div class="col-12 text-center text-muted">
+                <div class="spinner-border text-secondary" role="status"></div>
+                <p class="mt-2">Đang tải sản phẩm...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 G9_TrangSucDB. Thiết kế cho đồ án môn học.</p>
+        </div>
+    </footer>
+
+    <!-- Nhúng JS của Bootstrap 5 (Cần thiết để chạy các hiệu ứng như menu sổ xuống) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Nhúng file logic JS của riêng bạn (Sẽ tạo ở bước sau) -->
+    <script src="main.js"></script>
+</body>
+
+</html>
