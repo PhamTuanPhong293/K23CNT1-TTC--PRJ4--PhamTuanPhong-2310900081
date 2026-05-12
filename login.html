@@ -124,28 +124,58 @@
                 Chưa có tài khoản? <a href="register.html" class="link-gold">Đăng ký ngay</a>
             </div>
 
-            <!-- Gợi ý test cho lúc chấm đồ án -->
+            <!-- Gợi ý test -->
             <div class="mt-4 p-2 bg-light rounded text-center" style="font-size: 0.75rem; border: 1px dashed #ccc;">
-                <span class="fw-bold text-dark">Gợi ý test (Mock):</span><br>
-                - Nhập <b>admin</b> để vào trang Quản trị.<br>
-                - Nhập bất kỳ tài khoản khác để vào Trang chủ.
+                <span class="fw-bold text-dark">Tài khoản mẫu:</span><br>
+                - Admin: <b>bdhuy</b> / <b>123456</b><br>
+                - Khách hàng: <b>ptphong</b> / <b>123456</b>
             </div>
         </form>
     </div>
 
-    <!-- Script xử lý chuyển trang -->
     <script>
-        const handleLogin = (event) => {
-            event.preventDefault(); // Chặn load trang
-            const user = document.getElementById('username').value.toLowerCase();
+        // Tạo dữ liệu người dùng mặc định nếu chưa có
+        const initDefaultUsers = () => {
+            if (localStorage.getItem('g9_users')) return;
+            const defaultUsers = [
+                { username: 'bdhuy', fullname: 'Bùi Đức Huy', email: 'huy@gmail.com', phone: '0900000001', password: '123456', role: 'Admin' },
+                { username: 'nnhien', fullname: 'Nguyễn Ngọc Hiến', email: 'hien@gmail.com', phone: '0900000002', password: '123456', role: 'Khách hàng' },
+                { username: 'vmchi', fullname: 'Vũ Mai Chi', email: 'chi@gmail.com', phone: '0900000003', password: '123456', role: 'Khách hàng' },
+                { username: 'ptphong', fullname: 'Phạm Tuấn Phong', email: 'phong@gmail.com', phone: '0900000004', password: '123456', role: 'Khách hàng' }
+            ];
+            localStorage.setItem('g9_users', JSON.stringify(defaultUsers));
+        };
+        initDefaultUsers();
 
-            // Giả lập phân quyền đăng nhập
-            if (user === 'admin' || user === 'bdhuy') {
-                alert("Đăng nhập thành công với quyền Quản trị viên!");
-                window.location.href = 'admin.html'; // Chuyển vào Admin
+        // Nếu đã đăng nhập rồi thì chuyển hướng luôn
+        const currentUser = JSON.parse(localStorage.getItem('g9_currentUser'));
+        if (currentUser) {
+            window.location.href = currentUser.role === 'Admin' ? 'admin.html' : 'index.html';
+        }
+
+        const handleLogin = (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+
+            const users = JSON.parse(localStorage.getItem('g9_users') || '[]');
+            const user = users.find(u => u.username.toLowerCase() === username && u.password === password);
+
+            if (!user) {
+                alert('Sai tên đăng nhập hoặc mật khẩu! Vui lòng thử lại.');
+                return;
+            }
+
+            // Lưu phiên đăng nhập
+            const session = { username: user.username, fullname: user.fullname, email: user.email, phone: user.phone, role: user.role };
+            localStorage.setItem('g9_currentUser', JSON.stringify(session));
+
+            if (user.role === 'Admin') {
+                alert(`Xin chào ${user.fullname}! Đăng nhập với quyền Quản trị viên.`);
+                window.location.href = 'admin.html';
             } else {
-                alert("Đăng nhập thành công! Chào mừng khách hàng.");
-                window.location.href = 'index.html'; // Chuyển về Trang chủ
+                alert(`Xin chào ${user.fullname}! Chúc bạn mua sắm vui vẻ.`);
+                window.location.href = 'index.html';
             }
         };
     </script>

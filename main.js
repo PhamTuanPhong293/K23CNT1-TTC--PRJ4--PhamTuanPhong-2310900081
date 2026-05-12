@@ -1,291 +1,337 @@
-// ================= DỮ LIỆU GIẢ (CÓ THÊM ĐÁNH GIÁ) =================
-const mockProducts = [
-    {
-        id: 1, name: "Nhẫn vàng 18K đính Ngọc trai", price: 5000000, image: "images/nhan-vang.jpg", category: "Nhẫn",
-        reviews: [
-            { name: "Nguyễn Ngọc Hiến", rating: 5, comment: "Nhẫn rất sáng, thiết kế tinh xảo. Vợ mình rất thích!", date: "01/05/2026" },
-            { name: "Mai Chi", rating: 4, comment: "Giao hàng nhanh, đóng gói cẩn thận sang trọng. Hơi rộng một chút xíu.", date: "28/04/2026" }
-        ]
-    },
-    {
-        id: 2, name: "Nhẫn bạc đính đá Kim cương nhân tạo", price: 1200000, image: "images/nhan-bac.jpg", category: "Nhẫn",
-        reviews: [
-            { name: "Trần Anh Tú", rating: 5, comment: "Giá hợp lý mà nhìn sang không kém gì kim cương thật. 10 điểm!", date: "03/05/2026" }
-        ]
-    },
-    {
-        id: 3, name: "Dây chuyền Bạch kim nguyên chất", price: 7000000, image: "images/day-chuyen.jpg", category: "Dây chuyền",
-        reviews: [] // Chưa có đánh giá
-    }
+// ================= DỮ LIỆU SẢN PHẨM =================
+const products = [
+    { id: 1, name: "Nhẫn vàng 18K đính Ngọc trai", price: 5000000, image: "images/nhan-vang.jpg", category: "Nhẫn", desc: "Nhẫn vàng 18K sang trọng, đính ngọc trai tự nhiên biển Nam. Thiết kế tinh tế, phù hợp cho những dịp đặc biệt." },
+    { id: 2, name: "Nhẫn bạc đính đá Kim cương nhân tạo", price: 1200000, image: "images/nhan-bac.jpg", category: "Nhẫn", desc: "Nhẫn bạc 925 cao cấp, đính đá Kim cương nhân tạo lấp lánh. Phong cách hiện đại, trẻ trung." },
+    { id: 3, name: "Nhẫn Hồng Ngọc Ruby cao cấp", price: 8500000, image: "images/nhan-hong-ngoc.jpg", category: "Nhẫn", desc: "Nhẫn đính Hồng Ngọc Ruby thiên nhiên, chế tác thủ công bởi nghệ nhân hàng đầu Việt Nam." },
+    { id: 4, name: "Dây chuyền Bạch kim nguyên chất", price: 7000000, image: "images/day-chuyen.jpg", category: "Dây chuyền", desc: "Dây chuyền Bạch kim Platinum 950 nguyên chất, mắt xích mềm mại. Sang trọng và bền bỉ theo thời gian." },
+    { id: 5, name: "Dây chuyền Vàng Ý 14K mắt xích", price: 9500000, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop", category: "Dây chuyền", desc: "Dây chuyền Vàng Ý 14K nhập khẩu chính hãng, thiết kế mắt xích tinh xảo. Phù hợp phối cùng mặt dây." },
+    { id: 6, name: "Bông tai Ngọc trai Akoya", price: 3200000, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop", category: "Bông tai", desc: "Bông tai Ngọc trai Akoya Nhật Bản, ánh xà cừ hồng nhẹ. Tôn vinh nét đẹp dịu dàng, nữ tính." },
+    { id: 7, name: "Bông tai Kim cương Halo", price: 15000000, image: "https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=400&h=400&fit=crop", category: "Bông tai", desc: "Bông tai Kim cương thiết kế Halo cổ điển, viền đá tấm lấp lánh. Đẳng cấp vượt thời gian." },
+    { id: 8, name: "Nhẫn cưới đôi Vàng trắng 18K", price: 12000000, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=400&fit=crop", category: "Nhẫn", desc: "Cặp nhẫn cưới Vàng trắng 18K, khắc tên miễn phí. Biểu tượng hoàn hảo cho tình yêu đôi lứa." },
+    { id: 9, name: "Dây chuyền Bạc đính Sapphire", price: 4500000, image: "https://images.unsplash.com/photo-1515562141589-67f0d569b6c5?w=400&h=400&fit=crop", category: "Dây chuyền", desc: "Dây chuyền Bạc 925 mạ vàng, mặt đá Sapphire xanh biển. Thanh lịch và cuốn hút." },
+    { id: 10, name: "Bông tai Vàng hồng đính CZ", price: 2800000, image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400&h=400&fit=crop", category: "Bông tai", desc: "Bông tai Vàng hồng 14K đính đá CZ, thiết kế dạng giọt nước. Nhẹ nhàng, thanh tao." },
+    { id: 11, name: "Nhẫn Emerald thiên nhiên Colombia", price: 18000000, image: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=400&h=400&fit=crop", category: "Nhẫn", desc: "Nhẫn Vàng 18K đính Emerald Colombia thiên nhiên, viền Kim cương tấm. Quý hiếm và đẳng cấp." },
+    { id: 12, name: "Dây chuyền Choker Ngọc trai", price: 6800000, image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&h=400&fit=crop", category: "Dây chuyền", desc: "Dây chuyền Choker ngọc trai nước ngọt, phong cách cổ điển Châu Âu. Thời thượng và quý phái." }
 ];
 
-// Khởi tạo giỏ hàng
-let cart = JSON.parse(localStorage.getItem('g9_cart')) || [];
+// ================= TIỆN ÍCH CHUNG =================
+const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 
-// Format tiền tệ
-const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-};
-
-// ================= LOGIC GIỎ HÀNG CHUNG =================
-const saveCart = () => {
-    localStorage.setItem('g9_cart', JSON.stringify(cart));
-    updateCartBadge();
-};
+const getCart = () => JSON.parse(localStorage.getItem('g9_cart') || '[]');
+const saveCart = (cart) => localStorage.setItem('g9_cart', JSON.stringify(cart));
 
 const updateCartBadge = () => {
     const badge = document.getElementById('cart-badge');
-    if (badge) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        badge.innerText = totalItems;
-    }
+    if (!badge) return;
+    const total = getCart().reduce((s, i) => s + i.quantity, 0);
+    badge.innerText = total;
+    badge.style.display = total > 0 ? 'inline-block' : 'none';
 };
 
-const addToCart = (productId) => {
-    const product = mockProducts.find(p => p.id === productId);
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) existingItem.quantity += 1;
-    else cart.push({ ...product, quantity: 1 });
-
-    saveCart();
+const addToCart = (productId, quantity = 1) => {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    let cart = getCart();
+    const idx = cart.findIndex(i => i.id === productId);
+    if (idx > -1) {
+        cart[idx].quantity += quantity;
+    } else {
+        cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category, quantity });
+    }
+    saveCart(cart);
+    updateCartBadge();
     alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
 };
 
-// ================= RENDER TRANG CHỦ =================
-const renderProducts = () => {
-    const productList = document.getElementById('product-list');
-    if (!productList) return;
+// ================= TRANG CHỦ (index.html) =================
+let currentCategory = 'All';
 
-    productList.innerHTML = '';
-    mockProducts.forEach(product => {
-        const productCard = `
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100 border-0 card-hover bg-white shadow-sm">
-                    <a href="detail.html?id=${product.id}" class="img-wrapper text-decoration-none">
-                        <img src="${product.image}" class="card-img-top product-img" style="height: 320px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/400x320?text=Loi+Anh'">
+const renderProducts = (list) => {
+    const container = document.getElementById('product-list');
+    if (!container) return;
+    if (list.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center py-5"><i class="fas fa-search fa-3x text-muted mb-3"></i><h5 class="text-muted">Không tìm thấy sản phẩm nào</h5></div>';
+        return;
+    }
+    container.innerHTML = list.map(p => `
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm card-hover h-100">
+                <div class="img-wrapper">
+                    <a href="detail.html?id=${p.id}">
+                        <img src="${p.image}" class="card-img-top product-img" alt="${p.name}" style="height: 260px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/400x260?text=G9+Trang+Suc'">
                     </a>
-                    <div class="card-body d-flex flex-column text-center p-4">
-                        <span class="text-uppercase text-muted fw-semibold mb-2" style="font-size: 0.75rem; letter-spacing: 2px;">${product.category}</span>
-                        <a href="detail.html?id=${product.id}" class="text-decoration-none">
-                            <h5 class="card-title fw-bold text-dark mb-3">${product.name}</h5>
-                        </a>
-                        <p class="card-text text-gold fw-bold fs-5 mb-4">${formatCurrency(product.price)}</p>
-                        <button onclick="addToCart(${product.id})" class="btn bg-gold mt-auto w-100 py-2 rounded-pill shadow-sm">
-                            <i class="fas fa-shopping-bag me-2"></i> Thêm vào giỏ
-                        </button>
-                    </div>
+                </div>
+                <div class="card-body px-3 pt-3 pb-2">
+                    <span class="badge bg-light text-muted border mb-2" style="font-size: 0.7rem;">${p.category}</span>
+                    <a href="detail.html?id=${p.id}" class="text-decoration-none">
+                        <h6 class="fw-semibold text-dark product-title-hover mb-2" style="min-height: 40px;">${p.name}</h6>
+                    </a>
+                    <p class="text-gold fw-bold fs-6 mb-0">${formatCurrency(p.price)}</p>
+                </div>
+                <div class="card-footer bg-white border-0 px-3 pb-3 pt-0">
+                    <button class="btn bg-gold btn-sm w-100 rounded-pill" onclick="addToCart(${p.id})">
+                        <i class="fas fa-cart-plus me-1"></i> Thêm giỏ hàng
+                    </button>
                 </div>
             </div>
-        `;
-        productList.innerHTML += productCard;
+        </div>
+    `).join('');
+};
+
+const filterCategory = (category) => {
+    currentCategory = category;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isActive = btn.textContent.trim() === (category === 'All' ? 'Tất cả' : category);
+        btn.classList.toggle('btn-dark', isActive);
+        btn.classList.toggle('btn-outline-dark', !isActive);
     });
+    const filtered = category === 'All' ? products : products.filter(p => p.category === category);
+    renderProducts(filtered);
 };
 
-// ================= RENDER TRANG GIỎ HÀNG =================
-const updateQuantity = (index, change) => {
-    if (cart[index].quantity + change > 0) cart[index].quantity += change;
-    else cart.splice(index, 1);
-    saveCart(); renderCartPage();
+const searchProducts = () => {
+    const keyword = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    let list = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
+    if (keyword) list = list.filter(p => p.name.toLowerCase().includes(keyword));
+    renderProducts(list);
 };
 
-const removeItem = (index) => {
-    cart.splice(index, 1);
-    saveCart(); renderCartPage();
+// ================= TRANG CHI TIẾT (detail.html) =================
+let currentProduct = null;
+let detailQty = 1;
+
+// Đánh giá mẫu
+const defaultReviews = [
+    { name: "Nguyễn Thị Mai", rating: 5, comment: "Sản phẩm rất đẹp, đóng gói cẩn thận. Giao hàng nhanh!", date: "05/05/2026" },
+    { name: "Trần Văn Đức", rating: 4, comment: "Chất lượng tốt, đúng như mô tả. Sẽ mua thêm lần sau.", date: "03/05/2026" },
+    { name: "Lê Hoàng Yến", rating: 5, comment: "Tuyệt vời! Đeo rất sang trọng, bạn bè ai cũng khen.", date: "01/05/2026" }
+];
+let allReviews = JSON.parse(localStorage.getItem('g9_reviews') || '{}');
+
+const loadProductDetail = () => {
+    const id = parseInt(new URLSearchParams(window.location.search).get('id'));
+    currentProduct = products.find(p => p.id === id);
+    if (!currentProduct) {
+        document.querySelector('main').innerHTML = '<div class="text-center py-5"><i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i><h4>Không tìm thấy sản phẩm</h4><a href="index.html" class="btn bg-gold rounded-pill mt-3 px-4">Quay lại trang chủ</a></div>';
+        return;
+    }
+    document.title = currentProduct.name + ' - G9 Trang Sức';
+    document.getElementById('detail-img').src = currentProduct.image;
+    document.getElementById('detail-name').innerText = currentProduct.name;
+    document.getElementById('detail-price').innerText = formatCurrency(currentProduct.price);
+    document.getElementById('detail-category').innerText = currentProduct.category;
+    document.getElementById('bread-category').innerText = currentProduct.category;
+    document.getElementById('bread-name').innerText = currentProduct.name;
+
+    const descEl = document.querySelector('main .text-muted.lh-lg');
+    if (descEl && currentProduct.desc) descEl.innerText = currentProduct.desc;
+
+    document.getElementById('btn-add-detail').onclick = () => addToCart(currentProduct.id, detailQty);
+
+    if (!allReviews[id]) allReviews[id] = [...defaultReviews];
+    renderReviews();
+
+    document.getElementById('review-form')?.addEventListener('submit', submitReview);
 };
 
-const renderCartPage = () => {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
-    if (!cartItemsContainer) return;
+const changeDetailQty = (delta) => {
+    detailQty = Math.max(1, detailQty + delta);
+    document.getElementById('detail-qty').value = detailQty;
+};
 
-    cartItemsContainer.innerHTML = '';
-    let totalAmount = 0;
+const renderReviews = () => {
+    const container = document.getElementById('review-list');
+    if (!container || !currentProduct) return;
+    const reviews = allReviews[currentProduct.id] || [];
+    if (reviews.length === 0) {
+        container.innerHTML = '<p class="text-muted">Chưa có đánh giá nào. Hãy là người đầu tiên!</p>';
+        return;
+    }
+    container.innerHTML = reviews.map(r => {
+        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        return `<div class="bg-white p-3 rounded-3 shadow-sm mb-3 border border-light">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center">
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(r.name)}&background=d4af37&color=fff&size=36" class="rounded-circle me-2" width="36">
+                    <div><span class="fw-semibold text-dark" style="font-size:0.95rem;">${r.name}</span><div class="star-rating">${stars}</div></div>
+                </div>
+                <small class="text-muted">${r.date}</small>
+            </div>
+            <p class="mb-0 text-muted small">${r.comment}</p>
+        </div>`;
+    }).join('');
+};
+
+const submitReview = (e) => {
+    e.preventDefault();
+    if (!currentProduct) return;
+    const name = document.getElementById('review-name').value;
+    const rating = parseInt(document.getElementById('review-rating').value);
+    const comment = document.getElementById('review-comment').value;
+    const d = new Date();
+    const date = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+    if (!allReviews[currentProduct.id]) allReviews[currentProduct.id] = [];
+    allReviews[currentProduct.id].unshift({ name, rating, comment, date });
+    localStorage.setItem('g9_reviews', JSON.stringify(allReviews));
+    renderReviews();
+    document.getElementById('review-form').reset();
+    alert('Cảm ơn bạn đã đánh giá!');
+};
+
+// ================= TRANG GIỎ HÀNG (cart.html) =================
+const loadCart = () => {
+    const tbody = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    if (!tbody) return;
+    const cart = getCart();
 
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = `<tr><td colspan="5" class="text-center py-5 text-muted fs-5">Giỏ hàng của bạn đang trống!</td></tr>`;
-        cartTotalElement.innerText = formatCurrency(0);
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5 text-muted"><i class="fas fa-shopping-cart fa-3x mb-3 d-block"></i>Giỏ hàng trống. <a href="index.html" class="text-gold">Mua sắm ngay!</a></td></tr>';
+        if (totalEl) totalEl.innerText = '0 ₫';
         return;
     }
 
-    cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        totalAmount += itemTotal;
-        cartItemsContainer.innerHTML += `
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <img src="${item.image}" style="width: 70px; height: 70px; object-fit: cover;" class="rounded me-3 border" onerror="this.src='https://via.placeholder.com/70'">
-                        <span class="fw-semibold">${item.name}</span>
+    let grandTotal = 0;
+    tbody.innerHTML = cart.map((item, idx) => {
+        const subtotal = item.price * item.quantity;
+        grandTotal += subtotal;
+        return `<tr>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img src="${item.image}" class="rounded me-3" width="56" height="56" style="object-fit:cover;" onerror="this.src='https://via.placeholder.com/56'">
+                    <div>
+                        <span class="fw-semibold text-dark">${item.name}</span>
+                        <div class="text-muted small">${item.category}</div>
                     </div>
-                </td>
-                <td class="text-muted">${formatCurrency(item.price)}</td>
-                <td>
-                    <div class="input-group input-group-sm mx-auto" style="width: 110px;">
-                        <button class="btn btn-outline-secondary" onclick="updateQuantity(${index}, -1)">-</button>
-                        <input type="text" class="form-control text-center fw-bold" value="${item.quantity}" readonly>
-                        <button class="btn btn-outline-secondary" onclick="updateQuantity(${index}, 1)">+</button>
-                    </div>
-                </td>
-                <td class="text-danger fw-bold">${formatCurrency(itemTotal)}</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="removeItem(${index})"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-        `;
-    });
-    cartTotalElement.innerText = formatCurrency(totalAmount);
+                </div>
+            </td>
+            <td class="text-gold fw-bold">${formatCurrency(item.price)}</td>
+            <td class="text-center">
+                <div class="input-group input-group-sm justify-content-center" style="width:120px; margin:0 auto;">
+                    <button class="btn btn-outline-secondary" onclick="updateCartQty(${item.id}, -1)">−</button>
+                    <input type="text" class="form-control text-center fw-bold" value="${item.quantity}" readonly>
+                    <button class="btn btn-outline-secondary" onclick="updateCartQty(${item.id}, 1)">+</button>
+                </div>
+            </td>
+            <td class="fw-bold">${formatCurrency(subtotal)}</td>
+            <td><button class="btn btn-outline-danger btn-sm rounded-circle" onclick="removeFromCart(${item.id})" title="Xóa"><i class="fas fa-trash"></i></button></td>
+        </tr>`;
+    }).join('');
+
+    if (totalEl) totalEl.innerText = formatCurrency(grandTotal);
 };
 
-// ================= RENDER TRANG THANH TOÁN =================
-const renderCheckoutPage = () => {
-    const checkoutSummary = document.getElementById('checkout-summary');
-    if (!checkoutSummary) return;
+const updateCartQty = (id, delta) => {
+    let cart = getCart();
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx === -1) return;
+    cart[idx].quantity += delta;
+    if (cart[idx].quantity < 1) cart.splice(idx, 1);
+    saveCart(cart);
+    updateCartBadge();
+    loadCart();
+};
 
+const removeFromCart = (id) => {
+    if (!confirm('Bạn muốn xóa sản phẩm này khỏi giỏ hàng?')) return;
+    let cart = getCart().filter(i => i.id !== id);
+    saveCart(cart);
+    updateCartBadge();
+    loadCart();
+};
+
+// ================= TRANG THANH TOÁN (checkout.html) =================
+const loadCheckout = () => {
+    const summary = document.getElementById('checkout-summary');
+    const totalEl = document.getElementById('checkout-total');
+    const countEl = document.getElementById('checkout-item-count');
+    if (!summary) return;
+
+    const cart = getCart();
     if (cart.length === 0) {
-        alert("Giỏ hàng trống!");
-        window.location.href = "index.html"; return;
-    }
-
-    checkoutSummary.innerHTML = '';
-    let totalAmount = 0; let totalItems = 0;
-
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        totalAmount += itemTotal; totalItems += item.quantity;
-        checkoutSummary.innerHTML += `
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div><h6 class="my-0">${item.name}</h6><small class="text-muted">x${item.quantity}</small></div>
-                <span class="text-muted">${formatCurrency(itemTotal)}</span>
-            </li>
-        `;
-    });
-    document.getElementById('checkout-item-count').innerText = totalItems;
-    document.getElementById('checkout-total').innerText = formatCurrency(totalAmount);
-};
-
-const placeOrder = (event) => {
-    event.preventDefault();
-    alert("🎉 Đặt hàng thành công!");
-    cart = []; saveCart();
-    window.location.href = "index.html";
-};
-
-// ================= LOGIC TRANG CHI TIẾT SẢN PHẨM =================
-let detailCurrentQty = 1;
-const changeDetailQty = (change) => {
-    const qtyInput = document.getElementById('detail-qty');
-    if (detailCurrentQty + change > 0) {
-        detailCurrentQty += change;
-        qtyInput.value = detailCurrentQty;
-    }
-};
-
-// Hàm đổ danh sách Review ra màn hình
-const renderReviews = (product) => {
-    const reviewList = document.getElementById('review-list');
-    if (!reviewList) return;
-
-    reviewList.innerHTML = '';
-
-    if (!product.reviews || product.reviews.length === 0) {
-        reviewList.innerHTML = `
-            <div class="text-center py-5 bg-light rounded-4 border border-dashed">
-                <i class="fas fa-comment-slash fs-1 text-muted opacity-50 mb-3"></i>
-                <h6 class="text-muted">Chưa có đánh giá nào.</h6>
-                <p class="small text-muted mb-0">Hãy là người đầu tiên đánh giá sản phẩm này!</p>
-            </div>
-        `;
+        summary.innerHTML = '<li class="list-group-item text-center text-muted py-4">Giỏ hàng trống</li>';
+        if (totalEl) totalEl.innerText = '0 ₫';
+        if (countEl) countEl.innerText = '0';
         return;
     }
 
-    product.reviews.forEach(rev => {
-        const stars = '★'.repeat(rev.rating);
-        const emptyStars = '☆'.repeat(5 - rev.rating);
-        reviewList.innerHTML += `
-            <div class="d-flex mb-4 border-bottom pb-4">
-                <img src="https://ui-avatars.com/api/?name=${rev.name}&background=d4af37&color=fff&bold=true" class="rounded-circle me-3 shadow-sm" width="50" height="50">
-                <div class="flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-                        <h6 class="fw-bold mb-0">${rev.name}</h6>
-                        <span class="small text-muted fw-normal">${rev.date}</span>
-                    </div>
-                    <div class="mb-2">
-                        <span class="star-rating">${stars}</span><span class="star-empty">${emptyStars}</span>
-                    </div>
-                    <p class="mb-0 text-dark" style="font-size: 0.95rem; line-height: 1.6;">${rev.comment}</p>
-                </div>
+    let total = 0;
+    summary.innerHTML = cart.map(item => {
+        const sub = item.price * item.quantity;
+        total += sub;
+        return `<li class="list-group-item d-flex justify-content-between lh-sm py-3">
+            <div>
+                <h6 class="my-0 fw-semibold">${item.name}</h6>
+                <small class="text-muted">SL: ${item.quantity}</small>
             </div>
-        `;
-    });
+            <span class="text-gold fw-bold">${formatCurrency(sub)}</span>
+        </li>`;
+    }).join('');
+
+    if (totalEl) totalEl.innerText = formatCurrency(total);
+    if (countEl) countEl.innerText = cart.reduce((s, i) => s + i.quantity, 0);
 };
 
-const renderDetailPage = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id'));
-    const detailName = document.getElementById('detail-name');
-    if (!detailName) return;
+const placeOrder = (e) => {
+    e.preventDefault();
+    const cart = getCart();
+    if (cart.length === 0) { alert('Giỏ hàng trống!'); return; }
+    alert('🎉 Đặt hàng thành công! Cảm ơn bạn đã mua sắm tại G9 Trang Sức.\nChúng tôi sẽ liên hệ xác nhận đơn hàng sớm nhất.');
+    localStorage.removeItem('g9_cart');
+    window.location.href = 'index.html';
+};
 
-    const product = mockProducts.find(p => p.id === productId);
+// ================= QUẢN LÝ ĐĂNG NHẬP / ĐĂNG XUẤT =================
+const getCurrentUser = () => JSON.parse(localStorage.getItem('g9_currentUser'));
 
-    if (product) {
-        document.getElementById('detail-img').src = product.image;
-        document.getElementById('detail-name').innerText = product.name;
-        document.getElementById('detail-category').innerText = product.category;
-        document.getElementById('detail-price').innerText = formatCurrency(product.price);
-        document.getElementById('bread-name').innerText = product.name;
-        document.getElementById('bread-category').innerText = product.category;
+const updateAuthArea = () => {
+    const authArea = document.getElementById('auth-area');
+    if (!authArea) return;
 
-        // Render Reviews
-        renderReviews(product);
-
-        // Xử lý Form Thêm Đánh Giá Mới
-        const reviewForm = document.getElementById('review-form');
-        if (reviewForm) {
-            reviewForm.onsubmit = (e) => {
-                e.preventDefault();
-                const name = document.getElementById('review-name').value;
-                const rating = parseInt(document.getElementById('review-rating').value);
-                const comment = document.getElementById('review-comment').value;
-
-                // Lấy ngày hôm nay
-                const today = new Date();
-                const dateStr = today.toLocaleDateString('vi-VN');
-
-                // Đẩy bình luận mới lên đầu danh sách
-                product.reviews.unshift({ name, rating, comment, date: dateStr });
-
-                // Tải lại danh sách bình luận
-                renderReviews(product);
-
-                // Xóa trắng form sau khi gửi
-                reviewForm.reset();
-                alert("Cảm ơn bạn đã gửi đánh giá! Bình luận của bạn đã được ghi nhận.");
-            };
-        }
-
-        // Cài đặt nút Thêm vào giỏ
-        document.getElementById('btn-add-detail').onclick = () => {
-            const existingItem = cart.find(item => item.id === product.id);
-            if (existingItem) existingItem.quantity += detailCurrentQty;
-            else cart.push({ ...product, quantity: detailCurrentQty });
-
-            saveCart();
-            alert(`Đã thêm ${detailCurrentQty} "${product.name}" vào giỏ hàng!`);
-
-            detailCurrentQty = 1;
-            document.getElementById('detail-qty').value = 1;
-        };
+    const user = getCurrentUser();
+    if (user) {
+        authArea.innerHTML = `
+            <div class="d-flex align-items-center">
+                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullname)}&background=d4af37&color=fff&size=32&bold=true"
+                     class="rounded-circle me-2" width="32" height="32" alt="Avatar">
+                <span class="fw-medium text-dark me-3" style="font-size:0.85rem;">${user.fullname}</span>
+                <a href="#" class="btn btn-outline-danger btn-sm rounded-pill px-3" onclick="logout(); return false;">
+                    <i class="fas fa-sign-out-alt me-1"></i>Đăng xuất
+                </a>
+            </div>
+        `;
     } else {
-        document.querySelector('main').innerHTML = '<h2 class="text-center py-5">Không tìm thấy sản phẩm!</h2>';
+        authArea.innerHTML = '<a href="login.html" class="btn btn-outline-dark rounded-pill px-4">Đăng nhập</a>';
+    }
+};
+
+const logout = () => {
+    if (confirm('Bạn muốn đăng xuất?')) {
+        localStorage.removeItem('g9_currentUser');
+        alert('Đã đăng xuất thành công!');
+        window.location.href = 'index.html';
     }
 };
 
 // ================= KHỞI CHẠY =================
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
-    renderProducts();
-    renderCartPage();
-    renderCheckoutPage();
-    renderDetailPage();
+    updateAuthArea();
+
+    const path = window.location.pathname;
+
+    // Trang chủ
+    if (path.endsWith('index.html') || path.endsWith('/')) {
+        const urlCat = new URLSearchParams(window.location.search).get('category');
+        if (urlCat) { filterCategory(urlCat); } else { renderProducts(products); }
+    }
+
+    // Trang chi tiết
+    if (path.endsWith('detail.html')) { loadProductDetail(); }
+
+    // Trang giỏ hàng
+    if (path.endsWith('cart.html')) { loadCart(); }
+
+    // Trang thanh toán
+    if (path.endsWith('checkout.html')) { loadCheckout(); }
 });

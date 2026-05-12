@@ -126,6 +126,22 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+
+        /* Box thống kê */
+        .stat-box {
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .bg-gradient-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #b5952f 100%);
+        }
+
+        .bg-gradient-dark {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+        }
     </style>
 </head>
 
@@ -133,7 +149,6 @@
 
     <div class="container-fluid p-0">
         <div class="row g-0">
-            <!-- Sidebar -->
             <div class="col-md-2 sidebar py-4">
                 <h4 class="text-center brand-text fw-bold mb-4 text-white">G9 <span class="text-gold">Admin</span></h4>
                 <nav class="mt-5">
@@ -141,17 +156,19 @@
                             class="fas fa-box w-25 text-center"></i> Sản phẩm</a>
                     <a id="nav-orders" onclick="switchTab('orders')"><i
                             class="fas fa-shopping-bag w-25 text-center"></i> Đơn hàng</a>
-                    <a href="#"><i class="fas fa-users w-25 text-center"></i> Khách hàng</a>
-                    <a href="#"><i class="fas fa-chart-pie w-25 text-center"></i> Thống kê</a>
+                    <a id="nav-customers" onclick="switchTab('customers')"><i class="fas fa-users w-25 text-center"></i>
+                        Khách hàng</a>
+                    <a id="nav-stats" onclick="switchTab('stats')"><i class="fas fa-chart-pie w-25 text-center"></i>
+                        Thống kê</a>
+                    <a id="nav-accounts" onclick="switchTab('accounts')"><i class="fas fa-user-shield w-25 text-center"></i>
+                        Tài khoản</a>
                     <hr>
-                    <a href="login.html" class="text-muted"><i class="fas fa-sign-out-alt w-25 text-center"></i> Đăng
+                    <a onclick="adminLogout()" style="cursor:pointer;" class="text-muted"><i class="fas fa-sign-out-alt w-25 text-center"></i> Đăng
                         xuất</a>
                 </nav>
             </div>
 
-            <!-- Main Content -->
             <div class="col-md-10 p-5">
-                <!-- Header -->
                 <div class="d-flex justify-content-between align-items-center mb-5">
                     <div>
                         <h2 id="page-title" class="fw-bold m-0 text-dark">Quản lý Sản phẩm</h2>
@@ -165,7 +182,6 @@
                     </div>
                 </div>
 
-                <!-- ================= SẢN PHẨM ================= -->
                 <div id="section-products" class="custom-card">
                     <div class="px-4 py-3 d-flex justify-content-between align-items-center border-bottom">
                         <h5 class="m-0 fw-bold text-dark" style="font-family: 'Poppins', sans-serif;">Danh sách Trang
@@ -191,7 +207,6 @@
                     </div>
                 </div>
 
-                <!-- ================= ĐƠN HÀNG ================= -->
                 <div id="section-orders" class="custom-card d-none">
                     <div class="px-4 py-3 d-flex justify-content-between align-items-center border-bottom">
                         <h5 class="m-0 fw-bold text-dark" style="font-family: 'Poppins', sans-serif;">Danh sách Đơn hàng
@@ -214,18 +229,101 @@
                     </div>
                 </div>
 
+                <div id="section-customers" class="custom-card d-none">
+                    <div class="px-4 py-3 d-flex justify-content-between align-items-center border-bottom">
+                        <h5 class="m-0 fw-bold text-dark" style="font-family: 'Poppins', sans-serif;">Tài khoản Khách
+                            hàng</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle m-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">Khách hàng</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày đăng ký</th>
+                                    <th>Trạng thái</th>
+                                    <th class="text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-customer-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="section-stats" class="d-none">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-box bg-gradient-gold">
+                                <h6 class="text-white-50 text-uppercase fw-bold mb-2">Tổng doanh thu</h6>
+                                <h3 class="fw-bold mb-0" id="stat-revenue">0 ₫</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box bg-gradient-dark">
+                                <h6 class="text-white-50 text-uppercase fw-bold mb-2">Tổng đơn hàng</h6>
+                                <h3 class="fw-bold mb-0" id="stat-orders">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box bg-gradient-dark">
+                                <h6 class="text-white-50 text-uppercase fw-bold mb-2">Khách hàng</h6>
+                                <h3 class="fw-bold mb-0" id="stat-customers">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box bg-gradient-dark">
+                                <h6 class="text-white-50 text-uppercase fw-bold mb-2">Sản phẩm kho</h6>
+                                <h3 class="fw-bold mb-0" id="stat-products">0</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-card p-4">
+                        <h5 class="fw-bold mb-4 font-sans text-dark">Biểu đồ doanh thu 6 tháng gần nhất</h5>
+                        <canvas id="revenueChart" height="100"></canvas>
+                    </div>
+                </div>
+
+                <!-- ================= QUẢN LÝ TÀI KHOẢN ================= -->
+                <div id="section-accounts" class="d-none">
+                    <div class="custom-card">
+                        <div class="px-4 py-3 d-flex justify-content-between align-items-center border-bottom">
+                            <h5 class="m-0 fw-bold text-dark" style="font-family: 'Poppins', sans-serif;">Danh sách Tài khoản Quản trị</h5>
+                            <button class="btn btn-gold btn-sm rounded-pill px-4 py-2" data-bs-toggle="modal" data-bs-target="#addAccountModal">
+                                <i class="fas fa-plus me-1"></i> Thêm tài khoản
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle m-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-4">Tài khoản</th>
+                                        <th>Họ và tên</th>
+                                        <th>Email</th>
+                                        <th>Vai trò</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày tạo</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-account-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- ================= MODAL THÊM SẢN PHẨM ================= -->
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-light border-bottom-0 rounded-top-4">
                     <h5 class="modal-title fw-bold" style="font-family: 'Playfair Display', serif;">Thêm Sản Phẩm Mới
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
                     <form id="add-product-form" onsubmit="handleAddProduct(event)">
@@ -259,62 +357,136 @@
         </div>
     </div>
 
-    <!-- ================= MODAL CHI TIẾT ĐƠN HÀNG ================= -->
     <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header bg-light border-bottom-0 rounded-top-4">
-                    <h5 class="modal-title fw-bold" style="font-family: 'Playfair Display', serif;">
-                        Chi Tiết Đơn Hàng <span id="detail-order-id" class="text-gold"></span>
+                    <h5 class="modal-title fw-bold" style="font-family: 'Playfair Display', serif;">Chi Tiết Đơn Hàng
+                        <span id="detail-order-id" class="text-gold"></span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <!-- Thông tin khách hàng -->
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <h6 class="fw-bold text-dark border-bottom pb-2">Thông tin khách hàng</h6>
-                            <p class="mb-1 mt-2"><strong>Họ tên:</strong> <span id="detail-customer"></span></p>
-                            <p class="mb-1"><strong>Số điện thoại:</strong> <span id="detail-phone"></span></p>
-                            <p class="mb-0"><strong>Địa chỉ:</strong> <span id="detail-address"></span></p>
+
+                    <!-- Ngày đặt & Trạng thái -->
+                    <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded-3">
+                        <div>
+                            <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem; letter-spacing:1px;">Ngày đặt hàng</small>
+                            <div class="fw-semibold text-dark"><i class="fas fa-calendar-alt text-gold me-2"></i><span id="detail-date"></span></div>
                         </div>
-                        <div class="col-md-6 text-md-end">
-                            <h6 class="fw-bold text-dark border-bottom pb-2">Trạng thái</h6>
-                            <span id="detail-status" class="badge fs-6 mt-2"></span>
+                        <div class="text-end">
+                            <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem; letter-spacing:1px;">Trạng thái</small>
+                            <div><span id="detail-status" class="badge fs-6 mt-1"></span></div>
                         </div>
                     </div>
 
-                    <!-- Danh sách sản phẩm mua -->
-                    <h6 class="fw-bold text-dark mb-3">Danh sách sản phẩm</h6>
+                    <!-- Timeline trạng thái -->
+                    <div id="detail-timeline" class="d-flex align-items-start justify-content-between mb-4 px-3"></div>
+
+                    <div class="row mb-4 g-4">
+                        <!-- Thông tin khách hàng -->
+                        <div class="col-md-6">
+                            <div class="border rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-dark mb-3"><i class="fas fa-user text-gold me-2"></i>Thông tin khách hàng</h6>
+                                <p class="mb-1"><strong>Họ tên:</strong> <span id="detail-customer"></span></p>
+                                <p class="mb-1"><strong>Email:</strong> <span id="detail-email" class="text-muted"></span></p>
+                                <p class="mb-1"><strong>Số điện thoại:</strong> <span id="detail-phone"></span></p>
+                                <p class="mb-0"><strong>Địa chỉ:</strong> <span id="detail-address"></span></p>
+                            </div>
+                        </div>
+                        <!-- Thanh toán & Ghi chú -->
+                        <div class="col-md-6">
+                            <div class="border rounded-3 p-3 h-100">
+                                <h6 class="fw-bold text-dark mb-3"><i class="fas fa-credit-card text-gold me-2"></i>Thanh toán & Ghi chú</h6>
+                                <p class="mb-1"><strong>Phương thức:</strong> <i id="detail-payment-icon" class="fas fa-money-bill-wave text-gold me-1"></i><span id="detail-payment"></span></p>
+                                <p class="mb-0"><strong>Ghi chú:</strong> <span id="detail-note" class="text-muted fst-italic"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danh sách sản phẩm -->
+                    <h6 class="fw-bold text-dark mb-3"><i class="fas fa-box-open text-gold me-2"></i>Danh sách sản phẩm</h6>
                     <div class="table-responsive mb-3">
                         <table class="table table-bordered align-middle">
                             <thead class="table-light">
                                 <tr>
+                                    <th class="text-center" style="width:50px;">STT</th>
                                     <th>Sản phẩm</th>
                                     <th>Đơn giá</th>
                                     <th class="text-center">Số lượng</th>
                                     <th class="text-end">Thành tiền</th>
                                 </tr>
                             </thead>
-                            <tbody id="detail-product-list">
-                                <!-- JS sẽ đổ danh sách món hàng vào đây -->
-                            </tbody>
+                            <tbody id="detail-product-list"></tbody>
                         </table>
                     </div>
 
-                    <div class="d-flex justify-content-end mt-4">
+                    <!-- Tổng cộng -->
+                    <div class="d-flex justify-content-end mt-3 p-3 bg-light rounded-3">
                         <h5 class="fw-bold m-0 text-dark">Tổng cộng: <span id="detail-total"
                                 class="text-gold ms-2"></span></h5>
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-outline-dark rounded-pill px-4" onclick="printOrderDetail()">
+                        <i class="fas fa-print me-1"></i> In đơn hàng
+                    </button>
                     <button type="button" class="btn btn-secondary rounded-pill px-4"
                         data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal Thêm Tài khoản -->
+    <div class="modal fade" id="addAccountModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-light border-bottom-0 rounded-top-4">
+                    <h5 class="modal-title fw-bold" style="font-family: 'Playfair Display', serif;">Thêm Tài Khoản Mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="add-account-form" onsubmit="handleAddAccount(event)">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-medium text-muted small">Tên đăng nhập *</label>
+                                <input type="text" class="form-control rounded-3" id="accUsername" placeholder="VD: admin2" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-medium text-muted small">Vai trò *</label>
+                                <select class="form-select rounded-3" id="accRole">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Quản lý">Quản lý</option>
+                                    <option value="Nhân viên">Nhân viên</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-medium text-muted small">Họ và tên *</label>
+                            <input type="text" class="form-control rounded-3" id="accFullname" placeholder="VD: Nguyễn Văn A" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-medium text-muted small">Email *</label>
+                                <input type="email" class="form-control rounded-3" id="accEmail" placeholder="email@gmail.com" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-medium text-muted small">Số điện thoại</label>
+                                <input type="tel" class="form-control rounded-3" id="accPhone" placeholder="0912345678">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-muted small">Mật khẩu *</label>
+                            <input type="password" class="form-control rounded-3" id="accPassword" placeholder="Nhập mật khẩu..." required>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100 py-2 rounded-pill fw-bold shadow-sm">Tạo tài khoản</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="admin.js"></script>
 </body>

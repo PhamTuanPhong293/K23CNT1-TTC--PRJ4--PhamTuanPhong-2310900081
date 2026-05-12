@@ -138,24 +138,62 @@
         </form>
     </div>
 
-    <!-- Script xử lý Đăng ký -->
     <script>
-        const handleRegister = (event) => {
-            event.preventDefault(); // Chặn load trang
+        // Nếu đã đăng nhập rồi thì chuyển hướng
+        const currentUser = JSON.parse(localStorage.getItem('g9_currentUser'));
+        if (currentUser) {
+            window.location.href = 'index.html';
+        }
 
+        const handleRegister = (event) => {
+            event.preventDefault();
+
+            const fullname = document.getElementById('reg-fullname').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const username = document.getElementById('reg-username').value.trim().toLowerCase();
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm').value;
 
             // Kiểm tra khớp mật khẩu
             if (password !== confirmPassword) {
-                alert("Lỗi: Mật khẩu xác nhận không khớp. Vui lòng kiểm tra lại!");
-                return; // Dừng lại không chạy tiếp
+                alert("Lỗi: Mật khẩu xác nhận không khớp!");
+                return;
             }
 
-            // Giả lập đăng ký thành công
-            alert("🎉 Chúc mừng! Bạn đã đăng ký tài khoản thành công. Vui lòng đăng nhập để tiếp tục.");
+            // Kiểm tra độ dài mật khẩu
+            if (password.length < 6) {
+                alert("Mật khẩu phải có ít nhất 6 ký tự!");
+                return;
+            }
 
-            // Chuyển hướng người dùng về trang đăng nhập
+            // Lấy danh sách users hiện có
+            let users = JSON.parse(localStorage.getItem('g9_users') || '[]');
+
+            // Kiểm tra trùng username
+            if (users.some(u => u.username.toLowerCase() === username)) {
+                alert("Tên đăng nhập đã tồn tại! Vui lòng chọn tên khác.");
+                return;
+            }
+
+            // Kiểm tra trùng email
+            if (email && users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                alert("Email đã được sử dụng! Vui lòng dùng email khác.");
+                return;
+            }
+
+            // Thêm user mới
+            users.push({
+                username: username,
+                fullname: fullname,
+                email: email || '',
+                phone: phone,
+                password: password,
+                role: 'Khách hàng'
+            });
+            localStorage.setItem('g9_users', JSON.stringify(users));
+
+            alert("🎉 Đăng ký thành công! Vui lòng đăng nhập để tiếp tục.");
             window.location.href = 'login.html';
         };
     </script>
