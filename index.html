@@ -89,13 +89,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
                     <li class="nav-item"><a class="nav-link active px-3" href="index.html">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" onclick="filterCategory('Nhẫn')">Nhẫn</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#" onclick="filterCategory('Dây chuyền')">Dây
-                            chuyền</a></li>
-
-                    <li class="nav-item"><a class="nav-link px-3" href="#" onclick="filterCategory('Bông tai')">Bông
-                            tai</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#main-content" onclick="filterCategory('All')">Sản phẩm</a></li>
                 </ul>
                 <div class="d-flex align-items-center">
                     <a href="cart.html" class="text-dark me-4 position-relative">
@@ -128,7 +122,7 @@
             <div class="mx-auto mt-2" style="width: 60px; height: 3px; background-color: #d4af37;"></div>
         </div>
 
-        <div class="row mb-5 align-items-center bg-white p-3 rounded-4 shadow-sm border border-light">
+        <div class="row mb-3 align-items-center bg-white p-3 rounded-4 shadow-sm border border-light">
             <div class="col-md-7 mb-3 mb-md-0">
                 <div class="d-flex gap-2 flex-wrap">
                     <span class="fw-bold me-2 d-flex align-items-center"><i
@@ -153,8 +147,184 @@
             </div>
         </div>
 
+        <!-- Lọc theo mức giá -->
+        <div class="row mb-5 align-items-center bg-white p-3 rounded-4 shadow-sm border border-light">
+            <div class="col-12">
+                <div class="d-flex gap-2 flex-wrap align-items-center">
+                    <span class="fw-bold me-2 d-flex align-items-center"><i
+                            class="fas fa-tag text-gold me-2"></i>Mức giá:</span>
+                    <button class="btn btn-dark rounded-pill px-3 price-btn" onclick="filterPrice(0, Infinity)">Tất cả</button>
+                    <button class="btn btn-outline-dark rounded-pill px-3 price-btn" onclick="filterPrice(0, 3000000)">Dưới 3 triệu</button>
+                    <button class="btn btn-outline-dark rounded-pill px-3 price-btn" onclick="filterPrice(3000000, 5000000)">3 - 5 triệu</button>
+                    <button class="btn btn-outline-dark rounded-pill px-3 price-btn" onclick="filterPrice(5000000, 10000000)">5 - 10 triệu</button>
+                    <button class="btn btn-outline-dark rounded-pill px-3 price-btn" onclick="filterPrice(10000000, Infinity)">Trên 10 triệu</button>
+
+                    <span class="border-start ms-2 ps-3 d-flex align-items-center gap-2 flex-wrap">
+                        <input type="number" id="priceMin" class="form-control form-control-sm rounded-pill border" style="width:120px;" placeholder="Từ (₫)">
+                        <span class="text-muted">–</span>
+                        <input type="number" id="priceMax" class="form-control form-control-sm rounded-pill border" style="width:120px;" placeholder="Đến (₫)">
+                        <button class="btn bg-gold btn-sm rounded-pill px-3" onclick="filterCustomPrice()">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <div class="row g-4" id="product-list">
         </div>
+
+        <!-- ================= KHUYẾN MÃI ================= -->
+        <section class="mt-5 pt-5">
+            <div class="text-center mb-5">
+                <h2 class="text-uppercase fw-bold">Ưu đãi đặc biệt</h2>
+                <div class="mx-auto mt-2" style="width: 60px; height: 3px; background-color: #d4af37;"></div>
+                <p class="text-muted mt-3">Chương trình khuyến mãi dành riêng cho khách hàng thân thiết</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Khuyến mãi 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+                        <div class="card-body p-4 text-white">
+                            <span class="badge bg-danger mb-3 px-3 py-2 rounded-pill">HOT</span>
+                            <h4 class="fw-bold mb-2">Giảm 20% Nhẫn cưới</h4>
+                            <p class="text-white-50 small mb-3">Ưu đãi đặc biệt cho các cặp đôi đặt nhẫn cưới trong tháng 5/2026. Áp dụng cho tất cả mẫu nhẫn cưới đôi.</p>
+                            <div class="d-flex gap-2 mb-3">
+                                <div class="text-center bg-white bg-opacity-10 rounded-3 px-3 py-2">
+                                    <div class="fw-bold fs-5" id="promo-days-1">15</div>
+                                    <small class="text-white-50" style="font-size:0.65rem;">NGÀY</small>
+                                </div>
+                                <div class="text-center bg-white bg-opacity-10 rounded-3 px-3 py-2">
+                                    <div class="fw-bold fs-5" id="promo-hours-1">08</div>
+                                    <small class="text-white-50" style="font-size:0.65rem;">GIỜ</small>
+                                </div>
+                                <div class="text-center bg-white bg-opacity-10 rounded-3 px-3 py-2">
+                                    <div class="fw-bold fs-5" id="promo-mins-1">42</div>
+                                    <small class="text-white-50" style="font-size:0.65rem;">PHÚT</small>
+                                </div>
+                            </div>
+                            <span class="text-gold fw-bold">Mã: WEDDING20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khuyến mãi 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="background: linear-gradient(135deg, #d4af37 0%, #b5952f 100%);">
+                        <div class="card-body p-4 text-white">
+                            <span class="badge bg-dark mb-3 px-3 py-2 rounded-pill">FREESHIP</span>
+                            <h4 class="fw-bold mb-2">Miễn phí vận chuyển</h4>
+                            <p class="text-white small mb-3" style="opacity:0.85;">Miễn phí giao hàng toàn quốc cho đơn hàng từ 5.000.000₫. Áp dụng không giới hạn số lần.</p>
+                            <div class="d-flex align-items-center gap-2 mb-3">
+                                <i class="fas fa-truck fa-2x"></i>
+                                <div>
+                                    <div class="fw-bold">Giao hàng 2h</div>
+                                    <small style="opacity:0.8;">Nội thành HN, HCM, ĐN</small>
+                                </div>
+                            </div>
+                            <span class="fw-bold bg-dark rounded-pill px-3 py-1" style="font-size:0.85rem;">Tự động áp dụng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khuyến mãi 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+                        <div class="card-body p-4 text-white">
+                            <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill">MỚI</span>
+                            <h4 class="fw-bold mb-2">Tích điểm thành viên</h4>
+                            <p class="text-white-50 small mb-3">Mỗi 100.000₫ mua sắm tích 1 điểm. Đổi 50 điểm = Voucher 500.000₫. Điểm không giới hạn thời gian sử dụng.</p>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="text-center">
+                                    <i class="fas fa-star fa-2x text-warning"></i>
+                                    <div class="small mt-1">Bạc</div>
+                                </div>
+                                <i class="fas fa-chevron-right text-white-50"></i>
+                                <div class="text-center">
+                                    <i class="fas fa-gem fa-2x text-info"></i>
+                                    <div class="small mt-1">Vàng</div>
+                                </div>
+                                <i class="fas fa-chevron-right text-white-50"></i>
+                                <div class="text-center">
+                                    <i class="fas fa-crown fa-2x text-warning"></i>
+                                    <div class="small mt-1">Kim cương</div>
+                                </div>
+                            </div>
+                            <span class="fw-bold text-warning">Đăng ký miễn phí!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TIN TỨC ================= -->
+        <section class="mt-5 pt-5 pb-3">
+            <div class="text-center mb-5">
+                <h2 class="text-uppercase fw-bold">Tin tức & Xu hướng</h2>
+                <div class="mx-auto mt-2" style="width: 60px; height: 3px; background-color: #d4af37;"></div>
+                <p class="text-muted mt-3">Cập nhật xu hướng trang sức mới nhất và mẹo bảo quản</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Tin 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100 rounded-4 overflow-hidden">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1515562141589-67f0d569b6c5?w=600&h=350&fit=crop"
+                                class="card-img-top product-img" alt="Xu hướng trang sức 2026" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-gold rounded-pill px-3">Xu hướng</span>
+                                <small class="text-muted"><i class="far fa-calendar me-1"></i>10/05/2026</small>
+                            </div>
+                            <h5 class="fw-bold mt-2 product-title-hover">Top 5 xu hướng trang sức nổi bật mùa Hè 2026</h5>
+                            <p class="text-muted small">Khám phá những mẫu trang sức đang làm mưa làm gió trong năm nay: từ phong cách minimalist đến vintage cổ điển...</p>
+                            <a href="#" class="text-gold text-decoration-none fw-medium small">Đọc thêm <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tin 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100 rounded-4 overflow-hidden">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&h=350&fit=crop"
+                                class="card-img-top product-img" alt="Bảo quản trang sức" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-dark rounded-pill px-3">Mẹo hay</span>
+                                <small class="text-muted"><i class="far fa-calendar me-1"></i>08/05/2026</small>
+                            </div>
+                            <h5 class="fw-bold mt-2 product-title-hover">Cách bảo quản trang sức vàng luôn sáng bóng</h5>
+                            <p class="text-muted small">Những bí quyết đơn giản giúp trang sức vàng, bạc của bạn luôn như mới: từ cách vệ sinh đến bảo quản đúng cách...</p>
+                            <a href="#" class="text-gold text-decoration-none fw-medium small">Đọc thêm <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tin 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow-sm card-hover h-100 rounded-4 overflow-hidden">
+                        <div class="img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&h=350&fit=crop"
+                                class="card-img-top product-img" alt="BST mới" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success rounded-pill px-3">Bộ sưu tập</span>
+                                <small class="text-muted"><i class="far fa-calendar me-1"></i>05/05/2026</small>
+                            </div>
+                            <h5 class="fw-bold mt-2 product-title-hover">Ra mắt BST "Tinh Hoa" - Đá quý thiên nhiên</h5>
+                            <p class="text-muted small">G9 Trang Sức hân hạnh giới thiệu bộ sưu tập mới nhất với Ruby, Sapphire và Emerald được tuyển chọn kỹ lưỡng...</p>
+                            <a href="#" class="text-gold text-decoration-none fw-medium small">Đọc thêm <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-dark text-white pt-5 pb-3 mt-auto border-top border-gold">

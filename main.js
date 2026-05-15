@@ -78,6 +78,18 @@ const renderProducts = (list) => {
     `).join('');
 };
 
+let currentPriceMin = 0;
+let currentPriceMax = Infinity;
+
+// Hàm áp dụng tất cả bộ lọc (danh mục + giá + từ khóa)
+const applyFilters = () => {
+    const keyword = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    let list = currentCategory === 'All' ? [...products] : products.filter(p => p.category === currentCategory);
+    list = list.filter(p => p.price >= currentPriceMin && p.price <= currentPriceMax);
+    if (keyword) list = list.filter(p => p.name.toLowerCase().includes(keyword));
+    renderProducts(list);
+};
+
 const filterCategory = (category) => {
     currentCategory = category;
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -85,15 +97,46 @@ const filterCategory = (category) => {
         btn.classList.toggle('btn-dark', isActive);
         btn.classList.toggle('btn-outline-dark', !isActive);
     });
-    const filtered = category === 'All' ? products : products.filter(p => p.category === category);
-    renderProducts(filtered);
+    applyFilters();
+};
+
+const filterPrice = (min, max) => {
+    currentPriceMin = min;
+    currentPriceMax = max;
+    // Cập nhật nút active
+    document.querySelectorAll('.price-btn').forEach(btn => {
+        btn.classList.remove('btn-dark');
+        btn.classList.add('btn-outline-dark');
+    });
+    event.target.closest('.price-btn').classList.remove('btn-outline-dark');
+    event.target.closest('.price-btn').classList.add('btn-dark');
+    // Xóa input tùy chỉnh
+    const minEl = document.getElementById('priceMin');
+    const maxEl = document.getElementById('priceMax');
+    if (minEl) minEl.value = '';
+    if (maxEl) maxEl.value = '';
+    applyFilters();
+};
+
+const filterCustomPrice = () => {
+    const minVal = parseFloat(document.getElementById('priceMin')?.value) || 0;
+    const maxVal = parseFloat(document.getElementById('priceMax')?.value) || Infinity;
+    if (minVal > maxVal && maxVal !== Infinity) {
+        alert('Giá tối thiểu không được lớn hơn giá tối đa!');
+        return;
+    }
+    currentPriceMin = minVal;
+    currentPriceMax = maxVal;
+    // Bỏ active tất cả nút giá preset
+    document.querySelectorAll('.price-btn').forEach(btn => {
+        btn.classList.remove('btn-dark');
+        btn.classList.add('btn-outline-dark');
+    });
+    applyFilters();
 };
 
 const searchProducts = () => {
-    const keyword = (document.getElementById('searchInput')?.value || '').toLowerCase();
-    let list = currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory);
-    if (keyword) list = list.filter(p => p.name.toLowerCase().includes(keyword));
-    renderProducts(list);
+    applyFilters();
 };
 
 // ================= TRANG CHI TIẾT (detail.html) =================
@@ -313,6 +356,38 @@ const logout = () => {
     }
 };
 
+// ================= ĐỒNG HỒ ĐẾM NGƯỢC KHUYẾN MÃI =================
+const startPromoCountdown = () => {
+    // Ngày kết thúc khuyến mãi: cuối tháng 5/2026
+    const endDate = new Date('2026-05-31T23:59:59');
+
+    const updateCountdown = () => {
+        const now = new Date();
+        const diff = endDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('promo-days-1').innerText = '00';
+            document.getElementById('promo-hours-1').innerText = '00';
+            document.getElementById('promo-mins-1').innerText = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        const daysEl = document.getElementById('promo-days-1');
+        const hoursEl = document.getElementById('promo-hours-1');
+        const minsEl = document.getElementById('promo-mins-1');
+        if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.innerText = String(mins).padStart(2, '0');
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 60000); // Cập nhật mỗi phút
+};
+
 // ================= KHỞI CHẠY =================
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
@@ -324,6 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (path.endsWith('index.html') || path.endsWith('/')) {
         const urlCat = new URLSearchParams(window.location.search).get('category');
         if (urlCat) { filterCategory(urlCat); } else { renderProducts(products); }
+        startPromoCountdown();
     }
 
     // Trang chi tiết

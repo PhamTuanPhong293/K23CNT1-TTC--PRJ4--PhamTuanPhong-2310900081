@@ -45,17 +45,29 @@ let adminOrders = [
     }
 ];
 
-let adminCustomers = [
-    { id: 1, name: "Bùi Đức Huy", email: "huy@gmail.com", phone: "0900000001", date: "01/05/2026", status: "Hoạt động" },
-    { id: 2, name: "Nguyễn Ngọc Hiến", email: "hien@gmail.com", phone: "0900000002", date: "02/05/2026", status: "Hoạt động" },
-    { id: 3, name: "Vũ Mai Chi", email: "chi@gmail.com", phone: "0900000003", date: "05/05/2026", status: "Hoạt động" },
-    { id: 4, name: "Phạm Tuấn Phong", email: "phong@gmail.com", phone: "0900000004", date: "10/05/2026", status: "Hoạt động" }
-];
 let adminAccounts = [
-    { id: 1, username: "bdhuy", fullname: "Bùi Đức Huy", email: "huy@gmail.com", phone: "0900000001", role: "Admin", status: "Hoạt động", date: "01/01/2026" },
-    { id: 2, username: "ptphong", fullname: "Phạm Tuấn Phong", email: "phong@gmail.com", phone: "0900000004", role: "Quản lý", status: "Hoạt động", date: "15/01/2026" },
-    { id: 3, username: "nnhien", fullname: "Nguyễn Ngọc Hiến", email: "hien@gmail.com", phone: "0900000002", role: "Nhân viên", status: "Hoạt động", date: "20/02/2026" },
-    { id: 4, username: "vmchi", fullname: "Vũ Mai Chi", email: "chi@gmail.com", phone: "0900000003", role: "Nhân viên", status: "Bị khóa", date: "01/03/2026" }
+    { id: 1, username: "bdhuy", fullname: "Bùi Đức Huy", email: "huy@gmail.com", phone: "0900000001", password: "admin", role: "Admin", status: "Hoạt động", date: "01/01/2026" },
+    { id: 2, username: "ptphong", fullname: "Phạm Tuấn Phong", email: "phong@gmail.com", phone: "0900000004", password: "123", role: "Quản lý", status: "Hoạt động", date: "15/01/2026" },
+    { id: 3, username: "nnhien", fullname: "Nguyễn Ngọc Hiến", email: "hien@gmail.com", phone: "0900000002", password: "123", role: "Nhân viên", status: "Hoạt động", date: "20/02/2026" },
+    { id: 4, username: "vmchi", fullname: "Vũ Mai Chi", email: "chi@gmail.com", phone: "0900000003", password: "123", role: "Nhân viên", status: "Bị khóa", date: "01/03/2026" }
+];
+
+let adminPromos = [
+    { id: 1, code: 'WEDDING20', name: 'Giảm 20% Nhẫn cưới', discount: 20, start: '01/05/2026', end: '31/05/2026', desc: 'Ưu đãi cho các cặp đôi đặt nhẫn cưới trong tháng 5', status: 'Hoạt động' },
+    { id: 2, code: 'SUMMER15', name: 'Hè rực rỡ - Giảm 15%', discount: 15, start: '01/06/2026', end: '30/06/2026', desc: 'Giảm giá toàn bộ sản phẩm mùa hè', status: 'Sắp diễn ra' },
+    { id: 3, code: 'VIP30', name: 'Khách VIP giảm 30%', discount: 30, start: '01/01/2026', end: '31/03/2026', desc: 'Dành riêng cho khách hàng hạng Kim cương', status: 'Hết hạn' }
+];
+
+let adminNews = [
+    { id: 1, title: 'Top 5 xu hướng trang sức nổi bật mùa Hè 2026', category: 'Xu hướng', image: 'https://images.unsplash.com/photo-1515562141589-67f0d569b6c5?w=80&h=80&fit=crop', date: '10/05/2026', summary: 'Khám phá những mẫu trang sức đang làm mưa làm gió...', status: 'Đã đăng' },
+    { id: 2, title: 'Cách bảo quản trang sức vàng luôn sáng bóng', category: 'Mẹo hay', image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=80&h=80&fit=crop', date: '08/05/2026', summary: 'Những bí quyết đơn giản giúp trang sức của bạn luôn như mới...', status: 'Đã đăng' },
+    { id: 3, title: 'Ra mắt BST "Tinh Hoa" - Đá quý thiên nhiên', category: 'Bộ sưu tập', image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=80&h=80&fit=crop', date: '05/05/2026', summary: 'G9 Trang Sức hân hạnh giới thiệu bộ sưu tập mới nhất...', status: 'Nháp' }
+];
+
+let adminCategories = [
+    { id: 1, name: 'Nhẫn', desc: 'Các loại nhẫn đính hôn, nhẫn cưới, nhẫn thời trang', count: 15 },
+    { id: 2, name: 'Dây chuyền', desc: 'Dây chuyền vàng, bạc, bạch kim đính đá quý', count: 8 },
+    { id: 3, name: 'Bông tai', desc: 'Khuyên tai nữ phong cách đa dạng', count: 12 }
 ];
 
 let myChart = null;
@@ -64,7 +76,7 @@ const formatCurrencyAdmin = (amount) => new Intl.NumberFormat('vi-VN', { style: 
 
 // ================= LOGIC CHUYỂN TAB =================
 const switchTab = (tabName) => {
-    ['products', 'orders', 'customers', 'stats', 'accounts'].forEach(tab => {
+    ['dashboard', 'products', 'orders', 'accounts', 'promotions', 'news', 'categories'].forEach(tab => {
         document.getElementById(`nav-${tab}`).classList.remove('active');
         document.getElementById(`section-${tab}`).classList.add('d-none');
     });
@@ -73,27 +85,103 @@ const switchTab = (tabName) => {
     document.getElementById(`section-${tabName}`).classList.remove('d-none');
 
     const titles = {
+        dashboard: ["Tổng quan Hệ thống", "Báo cáo nhanh các chỉ số hoạt động chính."],
         products: ["Quản lý Sản phẩm", "Kiểm soát kho hàng và cập nhật mẫu mã mới."],
         orders: ["Quản lý Đơn hàng", "Theo dõi và xử lý trạng thái giao hàng."],
-        customers: ["Quản lý Khách hàng", "Thông tin tài khoản và liên hệ của người dùng."],
-        stats: ["Thống kê Doanh thu", "Báo cáo tổng quan tình hình kinh doanh."],
-        accounts: ["Quản lý Tài khoản", "Quản lý tài khoản Admin, Quản lý và Nhân viên."]
+        accounts: ["Quản lý Tài khoản", "Quản lý tài khoản Admin, Quản lý và Nhân viên."],
+        promotions: ["Quản lý Khuyến mãi", "Tạo và quản lý các chương trình ưu đãi."],
+        news: ["Quản lý Tin tức", "Quản lý bài viết và xu hướng trang sức."],
+        categories: ["Quản lý Danh mục", "Thêm và chỉnh sửa các danh mục sản phẩm."]
     };
     document.getElementById('page-title').innerText = titles[tabName][0];
     document.getElementById('page-subtitle').innerText = titles[tabName][1];
 
+    if (tabName === 'dashboard') loadAdminDashboard();
     if (tabName === 'products') loadAdminProducts();
     if (tabName === 'orders') loadAdminOrders();
-    if (tabName === 'customers') loadAdminCustomers();
-    if (tabName === 'stats') loadAdminStats();
     if (tabName === 'accounts') loadAdminAccounts();
+    if (tabName === 'promotions') loadAdminPromos();
+    if (tabName === 'news') loadAdminNews();
+    if (tabName === 'categories') loadAdminCategories();
+};
+
+// ================= TRANG CHỦ (DASHBOARD) =================
+const loadAdminDashboard = () => {
+    // Tính tổng doanh thu
+    const totalRevenue = adminOrders
+        .filter(o => o.status !== 'Đã hủy')
+        .reduce((sum, o) => sum + o.total, 0);
+    document.getElementById('dash-revenue').innerText = formatCurrencyAdmin(totalRevenue);
+
+    // Tính tổng đơn hàng
+    document.getElementById('dash-orders').innerText = adminOrders.length;
+
+    // Tính tổng tài khoản
+    document.getElementById('dash-accounts').innerText = adminAccounts.length;
+
+    // Tính tổng sản phẩm
+    document.getElementById('dash-products').innerText = adminProducts.length;
+
+    // Render đơn hàng gần đây (lấy 5 đơn mới nhất)
+    const recentOrders = [...adminOrders].reverse().slice(0, 5);
+    const tbody = document.getElementById('dash-recent-orders');
+    if (tbody) {
+        tbody.innerHTML = recentOrders.map(o => {
+            const statusClass = {
+                'Đã giao': 'bg-success',
+                'Đang giao': 'bg-primary',
+                'Chờ xử lý': 'bg-warning text-dark',
+                'Đã hủy': 'bg-danger'
+            };
+            return `<tr>
+                <td class="ps-4 fw-medium text-muted">#${o.id}</td>
+                <td class="fw-semibold text-dark">${o.customer}</td>
+                <td class="text-muted small">${o.date}</td>
+                <td class="text-gold fw-bold">${formatCurrencyAdmin(o.total)}</td>
+                <td><span class="badge ${statusClass[o.status] || 'bg-secondary'} rounded-pill px-2 py-1">${o.status}</span></td>
+            </tr>`;
+        }).join('');
+    }
+
+    // Biểu đồ doanh thu
+    const ctx = document.getElementById('revenueChart')?.getContext('2d');
+    if (ctx) {
+        if (myChart) myChart.destroy();
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Tháng 12', 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+                datasets: [{
+                    label: 'Doanh thu (VNĐ)',
+                    data: [15000000, 22000000, 18000000, 30000000, 25000000, totalRevenue],
+                    backgroundColor: 'rgba(212, 175, 55, 0.8)',
+                    borderColor: '#d4af37',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: true, position: 'top' } },
+                scales: { y: { beginAtZero: true, ticks: { callback: v => (v / 1000000) + 'tr' } } }
+            }
+        });
+    }
 };
 
 // ================= RENDER SẢN PHẨM =================
 const loadAdminProducts = () => {
     const tbody = document.getElementById('admin-product-list');
     if (!tbody) return;
-    tbody.innerHTML = adminProducts.map((p, i) => `
+
+    let filtered = adminProducts.map((p, i) => ({ p, i }));
+    const keyword = document.getElementById('search-product')?.value.toLowerCase() || '';
+    const category = document.getElementById('filter-product-category')?.value || '';
+
+    if (keyword) filtered = filtered.filter(x => x.p.name.toLowerCase().includes(keyword) || x.p.id.toString().includes(keyword));
+    if (category) filtered = filtered.filter(x => x.p.category === category);
+
+    tbody.innerHTML = filtered.map(({ p, i }) => `
         <tr>
             <td class="ps-4 text-muted fw-medium" style="font-size:0.9rem;">#${p.id}</td>
             <td>
@@ -121,14 +209,43 @@ const deleteProduct = (index) => {
 
 const editProduct = (index) => {
     const p = adminProducts[index];
-    const newName = prompt("Sửa tên sản phẩm:", p.name);
-    if (newName === null) return;
-    const newPrice = prompt("Sửa giá bán (VNĐ):", p.price);
-    if (newPrice === null) return;
-    p.name = newName;
-    p.price = parseFloat(newPrice) || p.price;
+    document.getElementById('editProductIndex').value = index;
+    document.getElementById('editProductId').innerText = `#${p.id}`;
+    document.getElementById('editProductName').value = p.name;
+    document.getElementById('editProductCategory').value = p.category;
+    document.getElementById('editProductPrice').value = p.price;
+    document.getElementById('editProductImage').value = p.image;
+
+    // Hiển thị ảnh xem trước
+    const preview = document.getElementById('editProductPreview');
+    preview.src = p.image;
+    preview.style.display = 'block';
+
+    // Cập nhật ảnh khi thay đổi URL
+    document.getElementById('editProductImage').oninput = function () {
+        preview.src = this.value;
+        preview.style.display = this.value ? 'block' : 'none';
+    };
+
+    new bootstrap.Modal(document.getElementById('editProductModal')).show();
+};
+
+const handleEditProduct = (event) => {
+    event.preventDefault();
+    const index = parseInt(document.getElementById('editProductIndex').value);
+    const p = adminProducts[index];
+
+    p.name = document.getElementById('editProductName').value;
+    p.category = document.getElementById('editProductCategory').value;
+    p.price = parseFloat(document.getElementById('editProductPrice').value);
+    p.image = document.getElementById('editProductImage').value;
+
+    const modalEl = document.getElementById('editProductModal');
+    const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+    modal.hide();
+
     loadAdminProducts();
-    alert("Đã cập nhật sản phẩm!");
+    alert("Đã cập nhật sản phẩm thành công!");
 };
 
 const handleAddProduct = (event) => {
@@ -152,7 +269,15 @@ const handleAddProduct = (event) => {
 const loadAdminOrders = () => {
     const tbody = document.getElementById('admin-order-list');
     if (!tbody) return;
-    tbody.innerHTML = adminOrders.map((order, i) => {
+
+    let filtered = adminOrders.map((order, i) => ({ order, i }));
+    const keyword = document.getElementById('search-order')?.value.toLowerCase() || '';
+    const status = document.getElementById('filter-order-status')?.value || '';
+
+    if (keyword) filtered = filtered.filter(x => x.order.customer.toLowerCase().includes(keyword) || x.order.id.toString().includes(keyword) || (x.order.phone && x.order.phone.includes(keyword)));
+    if (status) filtered = filtered.filter(x => x.order.status === status);
+
+    tbody.innerHTML = filtered.map(({ order, i }) => {
         let bgClass = "bg-warning text-dark";
         if (order.status === "Đang giao") bgClass = "bg-primary text-white";
         if (order.status === "Hoàn thành") bgClass = "bg-success text-white";
@@ -265,85 +390,25 @@ function viewOrderDetails(index) {
     new bootstrap.Modal(document.getElementById('orderDetailModal')).show();
 }
 
-// ================= RENDER KHÁCH HÀNG =================
-const loadAdminCustomers = () => {
-    const tbody = document.getElementById('admin-customer-list');
-    if (!tbody) return;
-    tbody.innerHTML = adminCustomers.map((cus, i) => {
-        const statusBadge = cus.status === 'Hoạt động'
-            ? '<span class="badge bg-success">Hoạt động</span>'
-            : '<span class="badge bg-danger">Bị khóa</span>';
-        return `<tr>
-            <td class="ps-4">
-                <div class="d-flex align-items-center">
-                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(cus.name)}&background=f0f0f0&color=333" class="rounded-circle me-3" width="40">
-                    <span class="fw-semibold text-dark">${cus.name}</span>
-                </div>
-            </td>
-            <td class="text-muted">${cus.email}</td>
-            <td>${cus.phone}</td>
-            <td class="text-muted small">${cus.date}</td>
-            <td>${statusBadge}</td>
-            <td class="text-center">
-                <button class="btn btn-light btn-sm rounded text-danger shadow-sm" title="${cus.status === 'Hoạt động' ? 'Khóa' : 'Mở khóa'} tài khoản" onclick="toggleCustomerStatus(${i})">
-                    <i class="fas fa-${cus.status === 'Hoạt động' ? 'lock' : 'unlock'}"></i>
-                </button>
-            </td>
-        </tr>`;
-    }).join('');
-};
-
-const toggleCustomerStatus = (index) => {
-    const cus = adminCustomers[index];
-    const action = cus.status === 'Hoạt động' ? 'khóa' : 'mở khóa';
-    if (confirm(`Bạn có chắc muốn ${action} tài khoản "${cus.name}"?`)) {
-        cus.status = cus.status === 'Hoạt động' ? 'Bị khóa' : 'Hoạt động';
-        loadAdminCustomers();
-    }
-};
-
-// ================= RENDER THỐNG KÊ =================
-const loadAdminStats = () => {
-    const totalRevenue = adminOrders.filter(o => o.status === 'Hoàn thành').reduce((sum, o) => sum + o.total, 0);
-    document.getElementById('stat-revenue').innerText = formatCurrencyAdmin(totalRevenue);
-    document.getElementById('stat-orders').innerText = adminOrders.length;
-    document.getElementById('stat-customers').innerText = adminCustomers.length;
-    document.getElementById('stat-products').innerText = adminProducts.length;
-
-    const ctx = document.getElementById('revenueChart')?.getContext('2d');
-    if (!ctx) return;
-    if (myChart) myChart.destroy();
-
-    myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Tháng 12', 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
-            datasets: [{
-                label: 'Doanh thu (VNĐ)',
-                data: [15000000, 22000000, 18000000, 30000000, 25000000, totalRevenue],
-                backgroundColor: 'rgba(212, 175, 55, 0.8)',
-                borderColor: '#d4af37',
-                borderWidth: 1,
-                borderRadius: 5
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: true, position: 'top' } },
-            scales: { y: { beginAtZero: true, ticks: { callback: v => (v / 1000000) + 'tr' } } }
-        }
-    });
-};
 // ================= QUẢN LÝ TÀI KHOẢN =================
 const loadAdminAccounts = () => {
     const tbody = document.getElementById('admin-account-list');
     if (!tbody) return;
-    tbody.innerHTML = adminAccounts.map((acc, i) => {
-        const roleBadge = {
-            'Admin': '<span class="badge bg-danger px-2 py-1">Admin</span>',
-            'Quản lý': '<span class="badge bg-primary px-2 py-1">Quản lý</span>',
-            'Nhân viên': '<span class="badge bg-info text-dark px-2 py-1">Nhân viên</span>'
+
+    let filtered = adminAccounts.map((acc, i) => ({ acc, i }));
+    const keyword = document.getElementById('search-account')?.value.toLowerCase() || '';
+    const role = document.getElementById('filter-account-role')?.value || '';
+
+    if (keyword) filtered = filtered.filter(x => x.acc.username.toLowerCase().includes(keyword) || x.acc.fullname.toLowerCase().includes(keyword));
+    if (role) filtered = filtered.filter(x => x.acc.role === role);
+
+    tbody.innerHTML = filtered.map(({ acc, i }) => {
+        const roleColors = {
+            'Admin': 'bg-danger text-white',
+            'Quản lý': 'bg-primary text-white',
+            'Nhân viên': 'bg-info text-dark'
         };
+        const roleClass = roleColors[acc.role] || 'bg-secondary text-white';
         const statusBadge = acc.status === 'Hoạt động'
             ? '<span class="badge bg-success">Hoạt động</span>'
             : '<span class="badge bg-secondary">Bị khóa</span>';
@@ -358,11 +423,18 @@ const loadAdminAccounts = () => {
             </td>
             <td>${acc.fullname}</td>
             <td class="text-muted">${acc.email}</td>
-            <td>${roleBadge[acc.role] || acc.role}</td>
+            <td><span class="font-monospace text-muted bg-light px-2 py-1 rounded border">${acc.password || '******'}</span></td>
+            <td>
+                <select class="form-select form-select-sm border-0 ${roleClass}" style="width: 105px; border-radius: 20px; font-size: 0.8rem; padding-top: 0.25rem; padding-bottom: 0.25rem;" onchange="editAccountRole(${i}, this.value)">
+                    <option value="Admin" ${acc.role === 'Admin' ? 'selected' : ''} class="bg-white text-dark">Admin</option>
+                    <option value="Quản lý" ${acc.role === 'Quản lý' ? 'selected' : ''} class="bg-white text-dark">Quản lý</option>
+                    <option value="Nhân viên" ${acc.role === 'Nhân viên' ? 'selected' : ''} class="bg-white text-dark">Nhân viên</option>
+                </select>
+            </td>
             <td>${statusBadge}</td>
             <td class="text-muted small">${acc.date}</td>
             <td class="text-center">
-                <button class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width:32px;height:32px;" onclick="editAccountRole(${i})" title="Đổi vai trò"><i class="fas fa-user-cog" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width:32px;height:32px;" onclick="editAccount(${i})" title="Sửa"><i class="fas fa-pen" style="font-size:0.8rem;"></i></button>
                 <button class="btn btn-light btn-sm rounded-circle me-1 shadow-sm ${acc.status === 'Hoạt động' ? 'text-warning' : 'text-success'}" style="width:32px;height:32px;" onclick="toggleAccountStatus(${i})" title="${acc.status === 'Hoạt động' ? 'Khóa' : 'Mở khóa'}"><i class="fas fa-${acc.status === 'Hoạt động' ? 'lock' : 'unlock'}" style="font-size:0.8rem;"></i></button>
                 <button class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width:32px;height:32px;" onclick="deleteAccount(${i})" title="Xóa"><i class="fas fa-trash" style="font-size:0.8rem;"></i></button>
             </td>
@@ -389,7 +461,7 @@ const handleAddAccount = (event) => {
     const date = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
     const newId = adminAccounts.length > 0 ? Math.max(...adminAccounts.map(a => a.id)) + 1 : 1;
 
-    adminAccounts.push({ id: newId, username, fullname, email, phone, role, status: 'Hoạt động', date });
+    adminAccounts.push({ id: newId, username, fullname, email, phone, password, role, status: 'Hoạt động', date });
 
     const modalEl = document.getElementById('addAccountModal');
     const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
@@ -399,19 +471,35 @@ const handleAddAccount = (event) => {
     alert(`Đã tạo tài khoản "${username}" thành công!`);
 };
 
-const editAccountRole = (index) => {
+const editAccountRole = (index, newRole) => {
     const acc = adminAccounts[index];
-    const roles = ['Admin', 'Quản lý', 'Nhân viên'];
-    const currentIdx = roles.indexOf(acc.role);
-    const newRole = prompt(`Đổi vai trò cho "${acc.fullname}"\n\nChọn: Admin, Quản lý, Nhân viên`, acc.role);
-    if (newRole === null) return;
-    if (!roles.includes(newRole)) {
-        alert('Vai trò không hợp lệ! Vui lòng chọn: Admin, Quản lý hoặc Nhân viên.');
-        return;
-    }
     acc.role = newRole;
     loadAdminAccounts();
-    alert(`Đã cập nhật vai trò của "${acc.fullname}" thành ${newRole}.`);
+};
+
+const editAccount = (index) => {
+    const acc = adminAccounts[index];
+    document.getElementById('editAccIndex').value = index;
+    document.getElementById('editAccFullname').value = acc.fullname;
+    document.getElementById('editAccEmail').value = acc.email;
+    document.getElementById('editAccPhone').value = acc.phone || '';
+    document.getElementById('editAccPassword').value = acc.password || '';
+    new bootstrap.Modal(document.getElementById('editAccountModal')).show();
+};
+
+const handleEditAccount = (event) => {
+    event.preventDefault();
+    const index = document.getElementById('editAccIndex').value;
+    const acc = adminAccounts[index];
+    
+    acc.fullname = document.getElementById('editAccFullname').value;
+    acc.email = document.getElementById('editAccEmail').value;
+    acc.phone = document.getElementById('editAccPhone').value;
+    const pwd = document.getElementById('editAccPassword').value;
+    if (pwd) acc.password = pwd;
+    
+    bootstrap.Modal.getInstance(document.getElementById('editAccountModal'))?.hide();
+    loadAdminAccounts();
 };
 
 const toggleAccountStatus = (index) => {
@@ -433,6 +521,254 @@ const deleteAccount = (index) => {
         adminAccounts.splice(index, 1);
         loadAdminAccounts();
     }
+};
+
+// ================= QUẢN LÝ KHUYẾN MÃI =================
+const loadAdminPromos = () => {
+    const tbody = document.getElementById('admin-promo-list');
+    if (!tbody) return;
+    tbody.innerHTML = adminPromos.map((p, i) => {
+        const statusBadge = {
+            'Hoạt động': '<span class="badge bg-success px-2 py-1">Hoạt động</span>',
+            'Sắp diễn ra': '<span class="badge bg-info text-dark px-2 py-1">Sắp diễn ra</span>',
+            'Hết hạn': '<span class="badge bg-secondary px-2 py-1">Hết hạn</span>'
+        };
+        return `<tr>
+            <td class="ps-4">
+                <span class="badge bg-dark px-2 py-1 rounded-pill">${p.code}</span>
+            </td>
+            <td>
+                <div class="fw-semibold text-dark">${p.name}</div>
+                <small class="text-muted">${p.desc || ''}</small>
+            </td>
+            <td><span class="text-danger fw-bold fs-6">-${p.discount}%</span></td>
+            <td class="small text-muted">${p.start} → ${p.end}</td>
+            <td>${statusBadge[p.status] || p.status}</td>
+            <td class="text-center">
+                <button class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width:32px;height:32px;" onclick="editPromo(${i})" title="Sửa"><i class="fas fa-pen" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle me-1 text-warning shadow-sm" style="width:32px;height:32px;" onclick="togglePromoStatus(${i})" title="Đổi trạng thái"><i class="fas fa-sync-alt" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width:32px;height:32px;" onclick="deletePromo(${i})" title="Xóa"><i class="fas fa-trash" style="font-size:0.8rem;"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+};
+
+const handleAddPromo = (event) => {
+    event.preventDefault();
+    const code = document.getElementById('promoCode').value.toUpperCase();
+    const name = document.getElementById('promoName').value;
+    const discount = parseInt(document.getElementById('promoDiscount').value);
+    const startRaw = document.getElementById('promoStart').value;
+    const endRaw = document.getElementById('promoEnd').value;
+    const desc = document.getElementById('promoDesc').value;
+
+    if (adminPromos.some(p => p.code === code)) {
+        alert('Mã khuyến mãi đã tồn tại!');
+        return;
+    }
+
+    const formatDate = (d) => d.split('-').reverse().join('/');
+    const newId = adminPromos.length > 0 ? Math.max(...adminPromos.map(p => p.id)) + 1 : 1;
+    adminPromos.push({ id: newId, code, name, discount, start: formatDate(startRaw), end: formatDate(endRaw), desc, status: 'Hoạt động' });
+
+    const modalEl = document.getElementById('addPromoModal');
+    bootstrap.Modal.getInstance(modalEl)?.hide();
+    document.getElementById('add-promo-form').reset();
+    loadAdminPromos();
+    alert(`Đã tạo khuyến mãi "${code}" thành công!`);
+};
+
+const togglePromoStatus = (index) => {
+    const p = adminPromos[index];
+    const statuses = ['Hoạt động', 'Sắp diễn ra', 'Hết hạn'];
+    const next = statuses[(statuses.indexOf(p.status) + 1) % statuses.length];
+    p.status = next;
+    loadAdminPromos();
+};
+
+const editPromo = (index) => {
+    const p = adminPromos[index];
+    document.getElementById('editPromoIndex').value = index;
+    document.getElementById('editPromoName').value = p.name;
+    document.getElementById('editPromoDiscount').value = p.discount;
+    document.getElementById('editPromoStatus').value = p.status;
+    document.getElementById('editPromoDesc').value = p.desc || '';
+    new bootstrap.Modal(document.getElementById('editPromoModal')).show();
+};
+
+const handleEditPromo = (event) => {
+    event.preventDefault();
+    const index = document.getElementById('editPromoIndex').value;
+    const p = adminPromos[index];
+    p.name = document.getElementById('editPromoName').value;
+    p.discount = parseInt(document.getElementById('editPromoDiscount').value);
+    p.status = document.getElementById('editPromoStatus').value;
+    p.desc = document.getElementById('editPromoDesc').value;
+    bootstrap.Modal.getInstance(document.getElementById('editPromoModal'))?.hide();
+    loadAdminPromos();
+};
+
+const deletePromo = (index) => {
+    if (confirm(`Xóa khuyến mãi "${adminPromos[index].code}"?`)) {
+        adminPromos.splice(index, 1);
+        loadAdminPromos();
+    }
+};
+
+// ================= QUẢN LÝ TIN TỨC =================
+const loadAdminNews = () => {
+    const tbody = document.getElementById('admin-news-list');
+    if (!tbody) return;
+    tbody.innerHTML = adminNews.map((n, i) => {
+        const statusBadge = n.status === 'Đã đăng'
+            ? '<span class="badge bg-success px-2 py-1">Đã đăng</span>'
+            : '<span class="badge bg-warning text-dark px-2 py-1">Nháp</span>';
+        const catBadge = {
+            'Xu hướng': 'bg-gold',
+            'Mẹo hay': 'bg-dark',
+            'Bộ sưu tập': 'bg-success',
+            'Sự kiện': 'bg-primary'
+        };
+        return `<tr>
+            <td class="ps-4">
+                <img src="${n.image || 'https://via.placeholder.com/48'}" class="rounded-3 shadow-sm" width="48" height="48" style="object-fit:cover;" onerror="this.src='https://via.placeholder.com/48'">
+            </td>
+            <td>
+                <div class="fw-semibold text-dark">${n.title}</div>
+                <small class="text-muted">${(n.summary || '').substring(0, 60)}...</small>
+            </td>
+            <td><span class="badge ${catBadge[n.category] || 'bg-secondary'} rounded-pill px-2">${n.category}</span></td>
+            <td class="text-muted small">${n.date}</td>
+            <td>${statusBadge}</td>
+            <td class="text-center">
+                <button class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width:32px;height:32px;" onclick="editNews(${i})" title="Sửa"><i class="fas fa-pen" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle me-1 shadow-sm ${n.status === 'Đã đăng' ? 'text-warning' : 'text-success'}" style="width:32px;height:32px;" onclick="toggleNewsStatus(${i})" title="${n.status === 'Đã đăng' ? 'Chuyển Nháp' : 'Đăng bài'}"><i class="fas fa-${n.status === 'Đã đăng' ? 'eye-slash' : 'eye'}" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width:32px;height:32px;" onclick="deleteNews(${i})" title="Xóa"><i class="fas fa-trash" style="font-size:0.8rem;"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+};
+
+const handleAddNews = (event) => {
+    event.preventDefault();
+    const title = document.getElementById('newsTitle').value;
+    const category = document.getElementById('newsCategory').value;
+    const image = document.getElementById('newsImage').value;
+    const summary = document.getElementById('newsSummary').value;
+
+    const d = new Date();
+    const date = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+    const newId = adminNews.length > 0 ? Math.max(...adminNews.map(n => n.id)) + 1 : 1;
+
+    adminNews.push({ id: newId, title, category, image: image || 'https://via.placeholder.com/80', date, summary, status: 'Nháp' });
+
+    const modalEl = document.getElementById('addNewsModal');
+    bootstrap.Modal.getInstance(modalEl)?.hide();
+    document.getElementById('add-news-form').reset();
+    loadAdminNews();
+    alert(`Đã thêm bài viết "${title}" (Nháp). Bấm nút 👁 để đăng.`);
+};
+
+const toggleNewsStatus = (index) => {
+    const n = adminNews[index];
+    n.status = n.status === 'Đã đăng' ? 'Nháp' : 'Đã đăng';
+    loadAdminNews();
+};
+
+const editNews = (index) => {
+    const n = adminNews[index];
+    document.getElementById('editNewsIndex').value = index;
+    document.getElementById('editNewsTitle').value = n.title;
+    document.getElementById('editNewsCategory').value = n.category;
+    document.getElementById('editNewsImage').value = n.image || '';
+    document.getElementById('editNewsSummary').value = n.summary || '';
+    new bootstrap.Modal(document.getElementById('editNewsModal')).show();
+};
+
+const handleEditNews = (event) => {
+    event.preventDefault();
+    const index = document.getElementById('editNewsIndex').value;
+    const n = adminNews[index];
+    n.title = document.getElementById('editNewsTitle').value;
+    n.category = document.getElementById('editNewsCategory').value;
+    n.image = document.getElementById('editNewsImage').value || 'https://via.placeholder.com/80';
+    n.summary = document.getElementById('editNewsSummary').value;
+    bootstrap.Modal.getInstance(document.getElementById('editNewsModal'))?.hide();
+    loadAdminNews();
+};
+
+const deleteNews = (index) => {
+    if (confirm(`Xóa bài viết "${adminNews[index].title}"?`)) {
+        adminNews.splice(index, 1);
+        loadAdminNews();
+    }
+};
+
+// ================= QUẢN LÝ DANH MỤC =================
+const loadAdminCategories = () => {
+    const tbody = document.getElementById('admin-category-list');
+    if (!tbody) return;
+    tbody.innerHTML = adminCategories.map((c, i) => {
+        return `<tr>
+            <td class="ps-4 fw-medium text-muted">#${c.id}</td>
+            <td class="fw-semibold text-dark">${c.name}</td>
+            <td class="text-muted small">${c.desc || ''}</td>
+            <td><span class="badge bg-light text-dark border px-2 py-1">${c.count} sản phẩm</span></td>
+            <td class="text-center">
+                <button class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width:32px;height:32px;" onclick="editCategory(${i})" title="Sửa"><i class="fas fa-pen" style="font-size:0.8rem;"></i></button>
+                <button class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width:32px;height:32px;" onclick="deleteCategory(${i})" title="Xóa"><i class="fas fa-trash" style="font-size:0.8rem;"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+};
+
+const handleAddCategory = (event) => {
+    event.preventDefault();
+    const name = document.getElementById('categoryName').value;
+    const desc = document.getElementById('categoryDesc').value;
+
+    if (adminCategories.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+        alert('Tên danh mục đã tồn tại!');
+        return;
+    }
+
+    const newId = adminCategories.length > 0 ? Math.max(...adminCategories.map(c => c.id)) + 1 : 1;
+    adminCategories.push({ id: newId, name, desc, count: 0 });
+
+    const modalEl = document.getElementById('addCategoryModal');
+    bootstrap.Modal.getInstance(modalEl)?.hide();
+    document.getElementById('add-category-form').reset();
+    loadAdminCategories();
+    alert(`Đã thêm danh mục "${name}" thành công!`);
+};
+
+const deleteCategory = (index) => {
+    if (adminCategories[index].count > 0) {
+        alert('Không thể xóa danh mục đang có sản phẩm!');
+        return;
+    }
+    if (confirm(`Xóa danh mục "${adminCategories[index].name}"?`)) {
+        adminCategories.splice(index, 1);
+        loadAdminCategories();
+    }
+};
+
+const editCategory = (index) => {
+    const c = adminCategories[index];
+    document.getElementById('editCategoryIndex').value = index;
+    document.getElementById('editCategoryName').value = c.name;
+    document.getElementById('editCategoryDesc').value = c.desc || '';
+    new bootstrap.Modal(document.getElementById('editCategoryModal')).show();
+};
+
+const handleEditCategory = (event) => {
+    event.preventDefault();
+    const index = document.getElementById('editCategoryIndex').value;
+    const c = adminCategories[index];
+    c.name = document.getElementById('editCategoryName').value;
+    c.desc = document.getElementById('editCategoryDesc').value;
+    bootstrap.Modal.getInstance(document.getElementById('editCategoryModal'))?.hide();
+    loadAdminCategories();
 };
 
 // ================= IN ĐƠN HÀNG =================
@@ -502,5 +838,5 @@ document.addEventListener('DOMContentLoaded', () => {
         adminAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.fullname)}&background=d4af37&color=fff&bold=true`;
     }
 
-    loadAdminProducts();
+    switchTab('dashboard');
 });
