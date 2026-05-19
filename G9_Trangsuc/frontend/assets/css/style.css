@@ -1,34 +1,81 @@
+/* ================= GOOGLE FONTS ================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+/* ================= BASE ================= */
 body {
-    background-color: #f8f9fa;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fafafa;
+    color: #333;
 }
 
-.hero-section {
-    height: 500px;
-    background:
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200&auto=format&fit=crop');
-
-    background-size: cover;
-    background-position: center;
+h1, h2, h3, h4, h5, .navbar-brand, .brand-text, .font-serif, .section-title {
+    font-family: 'Playfair Display', serif;
 }
 
-.section-title {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 30px;
+/* ================= COLORS ================= */
+.text-gold { color: #d4af37; }
+
+.bg-gold {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.bg-gold:hover {
+    background-color: #b5952f;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-gold {
+    background-color: #d4af37;
+    color: white;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-gold:hover {
+    background-color: #b5952f;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+}
+
+.link-gold {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.link-gold:hover {
+    color: #b5952f;
+    text-decoration: underline;
+}
+
+/* ================= CARDS ================= */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
 .card {
     border: none;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.12);
 }
 
 .card img {
@@ -36,60 +83,343 @@ body {
     object-fit: cover;
 }
 
+/* ================= IMAGES ================= */
+.img-wrapper {
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.product-img {
+    transition: transform 0.6s ease;
+}
+
+.card-hover:hover .product-img,
+.card:hover .product-img {
+    transform: scale(1.08);
+}
+
+.product-title-hover {
+    transition: color 0.3s ease;
+}
+
+.product-title-hover:hover {
+    color: #d4af37 !important;
+}
+
 .product-price {
-    color: red;
-    font-size: 22px;
+    color: #d4af37;
+    font-size: 1.15rem;
     font-weight: bold;
 }
-/* ---*/
-.card {
-    transition: 0.3s;
+
+/* ================= HERO (HOME) ================= */
+.home-hero {
+    min-height: 500px;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+        url("https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1920&q=80");
+    background-size: cover;
+    background-position: center;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+.home-hero-overlay {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
 }
 
-.btn {
-    transition: 0.3s;
+.hero-subtitle {
+    color: #d4af37;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
-.btn:hover {
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.2;
+}
+
+.hero-desc {
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin: 20px auto;
+    opacity: 0.9;
+    letter-spacing: 1.5px;
+}
+
+/* ================= SECTION TITLES ================= */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.section-divider {
+    width: 60px;
+    height: 3px;
+    background-color: #d4af37;
+    margin: 10px auto 0;
+}
+
+/* ================= NAVBAR ================= */
+.nav-icon-btn {
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 8px 14px;
+}
+
+/* ================= PRODUCT PAGE ================= */
+.product-page-header {
+    background: linear-gradient(135deg, #111, #3a2b00);
+    color: white;
+    padding: 60px 0;
+}
+
+.product-page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.product-page-header p {
+    color: #f8d46b;
+    font-size: 1rem;
+}
+
+.product-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    display: flex;
+    width: 420px;
+    max-width: 100%;
+}
+
+.search-box input {
+    border-radius: 14px 0 0 14px;
+    height: 44px;
+}
+
+.search-box button {
+    border-radius: 0 14px 14px 0;
+    width: 80px;
+}
+
+.filter-btn, .price-btn {
+    transition: all 0.2s ease;
+}
+
+/* ================= PRODUCT DETAIL ================= */
+.detail-img-wrapper {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.detail-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.detail-img:hover {
     transform: scale(1.05);
+    cursor: crosshair;
 }
-/* ---*/
-.loading-spinner {
 
+.star-rating {
+    color: #ffc107;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+/* ================= LOGIN / REGISTER ================= */
+.login-page {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(17, 20, 26, 0.8), rgba(17, 20, 26, 0.8)),
+        url("https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=1920&q=80")
+        no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    border-top: 4px solid #d4af37;
+}
+
+.login-card .form-control {
+    border-radius: 10px;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.login-card .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+    border-color: #d4af37;
+}
+
+.login-input {
+    height: 48px;
+    border-radius: 12px;
+}
+
+.login-btn {
+    height: 48px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* ================= GOLD PRICE SECTION ================= */
+.gold-section {
+    background: linear-gradient(135deg, #fff8e1, #fffde7);
+}
+
+/* ================= CART ================= */
+.cart-item-img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ================= CHECKOUT ================= */
+.checkout-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    border-top: 3px solid #d4af37;
+}
+
+/* ================= CHATBOT ================= */
+.chatbot-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
     width: 60px;
     height: 60px;
+    z-index: 999;
+    font-size: 22px;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
 
-    border: 6px solid #ddd;
-    border-top: 6px solid gold;
-
+/* ================= LOADING ================= */
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #eee;
+    border-top: 5px solid #d4af37;
     border-radius: 50%;
-
     animation: spin 1s linear infinite;
-
-    margin: auto;
+    margin: 40px auto;
 }
 
 @keyframes spin {
-
-    100% {
-        transform: rotate(360deg);
-    }
+    100% { transform: rotate(360deg); }
 }
 
-/* ---  css admin */
-body {
-    background: #f4f6f9;
+/* ================= DROPDOWN ================= */
+.dropdown-menu {
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+    background: #d4af37;
+    color: #fff;
+}
+
+/* ================= PROFILE ================= */
+.profile-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= ORDERS ================= */
+.order-status-badge {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+/* ================= ADMIN STYLES ================= */
+.sidebar {
+    min-height: 100vh;
+    background-color: #11141a;
+    color: #8b92a5;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+.sidebar .brand-text {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    color: #8b92a5;
+    text-decoration: none;
+    padding: 14px 24px;
+    display: block;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-weight: 400;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: rgba(212, 175, 55, 0.08);
+    color: #d4af37;
+    border-left: 3px solid #d4af37;
+}
+
+.sidebar hr {
+    border-color: rgba(255, 255, 255, 0.08);
+    margin: 20px 0;
 }
 
 .admin-sidebar {
     width: 260px;
     min-height: 100vh;
-    background: #1f252b;
+    background: #11141a;
     position: fixed;
     left: 0;
     top: 0;
@@ -97,26 +427,27 @@ body {
 }
 
 .admin-logo {
-    color: #ffc107;
+    color: #d4af37;
     margin-bottom: 30px;
     font-weight: bold;
 }
 
 .admin-sidebar a {
     display: block;
-    color: white;
+    color: #8b92a5;
     text-decoration: none;
     padding: 12px 15px;
     margin-bottom: 10px;
     border-radius: 8px;
-    border: 1px solid #6c757d;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s ease;
 }
 
 .admin-sidebar a:hover,
 .admin-sidebar a.active {
-    background: #ffc107;
-    color: #000;
-    border-color: #ffc107;
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    border-color: #d4af37;
 }
 
 .admin-logout {
@@ -135,13 +466,126 @@ body {
     padding: 50px;
 }
 
-.admin-card {
+.admin-card, .custom-card {
+    background: #ffffff;
     border: none;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    overflow: hidden;
 }
 
-.table thead th {
-    background: #1f252b;
+/* ================= ADMIN TABLE ================= */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    border-bottom: 2px solid #f0f0f0;
+    color: #9ea4b1;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    padding: 18px 15px;
+    background-color: #fafbfc;
+}
+
+.table td {
+    vertical-align: middle;
+    border-bottom: 1px solid #f8f9fa;
+    color: #444;
+    padding: 15px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fdfcf9;
+}
+
+/* ================= ADMIN DASHBOARD ================= */
+.dashboard-card {
+    padding: 28px;
+    border-radius: 20px;
     color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+}
+
+.dashboard-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.dashboard-card h2 {
+    margin-top: 12px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.stat-box {
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.bg-gradient-gold {
+    background: linear-gradient(135deg, #d4af37 0%, #b5952f 100%);
+}
+
+.bg-gradient-dark {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+}
+
+.bg-blue { background: linear-gradient(135deg, #0d6efd, #4dabf7); }
+.bg-green { background: linear-gradient(135deg, #198754, #51cf66); }
+.bg-yellow { background: linear-gradient(135deg, #ffc107, #ffd43b); color: #212529; }
+.bg-red { background: linear-gradient(135deg, #dc3545, #ff6b6b); }
+
+.status-select {
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* ================= NEWS ================= */
+.news-card .card-body {
+    padding: 1.25rem;
+}
+
+/* ================= WISHLIST ================= */
+.wishlist-item {
+    transition: all 0.3s ease;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2rem; }
+    .hero-desc { font-size: 1rem; }
+    .product-page-header h1 { font-size: 1.8rem; }
+    .admin-content { margin-left: 0; padding: 20px; }
+    .admin-sidebar { position: relative; width: 100%; }
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* ================= FOOTER ================= */
+.footer-brand {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
 }
