@@ -1,0 +1,54 @@
+<h5 id="formTitle">Thêm sản phẩm</h5>
+
+<form id="productForm">
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <label>Tên sản phẩm</label>
+            <input type="text" id="name" class="form-control" required>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Danh mục</label>
+            <select id="categoryId" class="form-select" required></select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Chất liệu</label>
+            <input type="text" id="material" class="form-control">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Giá</label>
+            <input type="number" id="price" class="form-control" required>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Số lượng</label>
+            <input type="number" id="quantity" class="form-control" required>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Tên ảnh</label>
+            <input type="text" id="image" class="form-control" placeholder="ring1.jpg">
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>Trạng thái</label>
+            <select id="status" class="form-select">
+                <option value="Còn hàng">Còn hàng</option>
+                <option value="Hết hàng">Hết hàng</option>
+                <option value="Ẩn">Ẩn</option>
+            </select>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Mô tả</label>
+            <textarea id="description" class="form-control"></textarea>
+        </div>
+
+    </div>
+
+    <button id="submitBtn" class="btn btn-warning">Thêm sản phẩm</button>
+    <button type="button" onclick="resetForm()" class="btn btn-secondary">Làm mới</button>
+</form>

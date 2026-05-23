@@ -1,0 +1,224 @@
+===========================
+DỰ ÁN WEBSITE G9 TRANG SỨC
+===========================
+
+Công nghệ sử dụng:
+- Backend: Python FlaskAPI
+- Database: Microsoft SQL Server
+- Frontend: HTML5, CSS3, JavaScript, Bootstrap 5
+- API: Fetch / Axios
+- Thông báo: SweetAlert2
+- Dashboard: Chart.js
+- IDE: Visual Studio Code
+- Quản lý source: Git / GitHub
+
+
+=========================================================
+CẤU TRÚC THƯ MỤC DỰ ÁN WEBSITE BÁN TRANG SỨC G9
+=========================================================
+
+
+backend/
+│   ├── app.py
+│   ├── config.py
+│   ├── requirements.txt
+│   │
+│   ├── database/
+│   │   ├── db.py
+│   │   └── init.sql
+│   │
+│   ├── routes/
+│   │   ├── auth_routes.py
+│   │   ├── product_routes.py
+│   │   ├── category_routes.py
+│   │   ├── order_routes.py
+│   │   ├── news_routes.py
+│   │   ├── gold_routes.py
+│   │   ├── review_routes.py
+│   │   └── admin_routes.py
+│   │
+│   ├── services/
+│   │   ├── auth_service.py
+│   │   ├── product_service.py
+│   │   └── order_service.py
+│   │
+│   ├── models/
+│   │   ├── user_model.py
+│   │   ├── product_model.py
+│   │   └── order_model.py
+│   │
+│   ├── uploads/
+│   │
+│   └── utils/
+│       ├── jwt_helper.py
+│       └── validators.py
+│
+├── frontend/
+│   ├── user/
+│   │   ├── index.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   ├── login.html
+│   │   ├── news.html
+│   │   └── gold-price.html
+│   │
+│   ├── admin/
+│   │   ├── dashboard.html
+│   │   ├── products.html
+│   │   ├── categories.html
+│   │   ├── orders.html
+│   │   └── news.html
+│   │
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── js/
+│   │   │   ├── user/
+│   │   │   ├── admin/
+│   │   │   └── shared/
+│   │   ├── images/
+│   │   └── uploads/
+│   │
+│   └── components/
+│       ├── header.html
+│       ├── footer.html
+│       └── sidebar.html
+│
+└── docs/
+    ├── api_docs.md
+    └── database_design.md
+
+───────────────────────────────────────
+   GITHUB & QUẢN LÝ SOURCE
+───────────────────────────────────────
+
+GitHub:
+- Push source code
+- Quản lý commit
+- Quản lý branch
+- Chia module theo thành viên
+
+
+=========================================================
+PHÂN CÔNG THÀNH VIÊN
+=========================================================
+
+1. NNH — Xác thực & Tài khoản
+--------------------------------
+Backend:
+- auth_routes.py
+- auth_service.py
+
+Frontend:
+- login.html
+- register.html
+- forgot-password.html
+- profile.html
+
+Chức năng:
+- Đăng nhập
+- Đăng ký
+- Quên mật khẩu
+- Đổi mật khẩu
+- Logout
+- Phân quyền
+- Thông tin người dùng
+
+
+2. BDH — Backend API & Dashboard
+--------------------------------
+Backend:
+- product_routes.py
+- category_routes.py
+- order_routes.py
+- dashboard_routes.py
+- news_routes.py
+- gold_routes.py
+- review_routes.py
+- user_routes.py
+
+Chức năng:
+- CRUD sản phẩm
+- CRUD danh mục
+- CRUD đơn hàng
+- CRUD người dùng
+- Dashboard thống kê
+- API tin tức
+- API giá vàng
+- API đánh giá
+
+
+3. PTP — Frontend khách hàng
+--------------------------------
+Frontend:
+- index.html
+- products.html
+- product-detail.html
+- cart.html
+
+JS:
+- product.js
+- product-detail.js
+- cart.js
+
+Chức năng:
+- Trang chủ
+- Hiển thị sản phẩm
+- Tìm kiếm sản phẩm
+- Chi tiết sản phẩm
+- Giỏ hàng
+
+
+4. VMC — Thanh toán & Tin tức
+--------------------------------
+Frontend:
+- checkout.html
+- orders.html
+- order-detail.html
+- gold-price.html
+- news.html
+- news-detail.html
+
+JS:
+- checkout.js
+- order.js
+- gold.js
+- news.js
+
+Chức năng:
+- Thanh toán
+- Đặt hàng
+- Xem đơn hàng
+- Giá vàng
+- Tin tức
+- Đánh giá sản phẩm
+
+
+=========================================================
+CHỨC NĂNG WEBSITE HOÀN CHỈNH
+=========================================================
+
+KHÁCH HÀNG:
+- Đăng ký
+- Đăng nhập
+- Quên mật khẩu
+- Xem sản phẩm
+- Tìm kiếm sản phẩm
+- Xem chi tiết sản phẩm
+- Thêm giỏ hàng
+- Thanh toán
+- Theo dõi đơn hàng
+- Đánh giá sản phẩm
+- Xem giá vàng
+- Xem tin tức
+
+
+ADMIN:
+- Dashboard thống kê
+- CRUD sản phẩm
+- CRUD danh mục
+- CRUD đơn hàng
+- CRUD người dùng
+- CRUD tin tức
+- CRUD giá vàng
+- Quản lý đánh giá
+- Quản lý thanh toán
