@@ -19,7 +19,7 @@ load_dotenv()
 def get_connection():
     conn = pyodbc.connect(
         r"DRIVER={ODBC Driver 17 for SQL Server};"
-        r"SERVER=DESKTOP-OBG50HB\SQLEXPRESS;"
+        r"SERVER=DESKTOP-LCIE2RM\SQLEXPRESS;"
         r"DATABASE=G9_TrangSucDB;"
         r"Trusted_Connection=yes;"
         r"TrustServerCertificate=yes;"
